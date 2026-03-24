@@ -27,8 +27,25 @@
     .nav-links a:hover { color: var(--white); }
     .nav-cta { background: var(--gold); color: var(--navy) !important; font-weight: 700 !important; padding: 8px 18px; border-radius: 6px; }
 
-    .hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, var(--blue) 100%); padding: 80px 5% 70px; position: relative; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(232,160,32,0.12) 0%, transparent 70%); pointer-events: none; }
+    .hero {
+      background-image: url('https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=1800&q=80');
+      background-size: cover;
+      background-position: center 20%;
+      padding: 80px 5% 70px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(100deg,
+        rgba(10,26,52,0.97) 0%,
+        rgba(15,34,64,0.92) 45%,
+        rgba(20,50,100,0.70) 70%,
+        rgba(20,50,100,0.30) 100%
+      );
+      pointer-events: none;
+    }
     .hero-inner { max-width: 780px; }
     .hero-text { }
     .hero-image-wrap { width: 100%; line-height: 0; }
@@ -172,12 +189,6 @@
   </div>
 </section>
 
-<div class="hero-image-wrap">
-  <img
-    src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=1800&q=80"
-    alt="Friendly Lake County home service professional"
-  />
-</div>
 
 <section class="section" id="pricing">
   <div class="section-label">Instant Pricing</div>
