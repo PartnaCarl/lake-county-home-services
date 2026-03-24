@@ -3,779 +3,795 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lake County Home Services | Pressure Washing · Junk Removal · More</title>
-  <meta name="description" content="Professional home services for Lake Forest, Libertyville, Vernon Hills, Grayslake & Mundelein. Pressure washing, junk removal, pet waste removal. Fully insured. Fast response." />
+  <title>Lake County Home Services | Instant Pricing — Pressure Washing · Junk Removal · More</title>
+  <meta name="description" content="See your exact price instantly. No forms, no callbacks just to get a number. Pressure washing, junk removal, pet waste, windows, gutters. Lake County IL." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --navy: #0f2240;
-      --navy2: #1a3358;
-      --blue: #1e4d8c;
-      --gold: #e8a020;
-      --gold2: #f5b840;
-      --green: #1e7a4a;
-      --white: #ffffff;
-      --gray1: #f8f9fb;
-      --gray2: #eef0f4;
-      --gray3: #d0d5de;
-      --ink: #1a1f2e;
-      --ink2: #374151;
-      --ink3: #6b7280;
-      --radius: 10px;
-      --shadow: 0 4px 20px rgba(0,0,0,0.08);
-      --shadow-md: 0 8px 32px rgba(0,0,0,0.12);
+      --navy: #0f2240; --navy2: #1a3358; --blue: #1e4d8c;
+      --gold: #e8a020; --gold2: #f5b840; --green: #1e7a4a;
+      --white: #ffffff; --gray1: #f8f9fb; --gray2: #eef0f4; --gray3: #d0d5de;
+      --ink: #1a1f2e; --ink2: #374151; --ink3: #6b7280;
+      --radius: 10px; --shadow: 0 4px 20px rgba(0,0,0,0.08); --shadow-md: 0 8px 32px rgba(0,0,0,0.12);
     }
-
     html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--white); line-height: 1.6; }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      color: var(--ink);
-      background: var(--white);
-      line-height: 1.6;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--navy);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5%;
-      height: 64px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
-    }
-
-    .nav-logo {
-      color: var(--white); font-weight: 800; font-size: 17px; letter-spacing: -0.3px;
-      display: flex; align-items: center; gap: 8px; text-decoration: none;
-    }
-
+    nav { position: sticky; top: 0; z-index: 100; background: var(--navy); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; height: 64px; box-shadow: 0 2px 12px rgba(0,0,0,0.25); }
+    .nav-logo { color: var(--white); font-weight: 800; font-size: 17px; text-decoration: none; }
     .nav-logo span { color: var(--gold); }
-
     .nav-links { display: flex; align-items: center; gap: 24px; }
-
-    .nav-links a {
-      color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px;
-      transition: color 0.2s;
-    }
-
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; transition: color 0.2s; }
     .nav-links a:hover { color: var(--white); }
+    .nav-cta { background: var(--gold); color: var(--navy) !important; font-weight: 700 !important; padding: 8px 18px; border-radius: 6px; }
 
-    .nav-cta {
-      background: var(--gold); color: var(--navy) !important; font-weight: 700 !important;
-      padding: 8px 18px; border-radius: 6px; font-size: 14px !important;
-      transition: background 0.2s !important;
-    }
-
-    .nav-cta:hover { background: var(--gold2) !important; color: var(--navy) !important; }
-
-    /* ── HERO ── */
-    .hero {
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, var(--blue) 100%);
-      padding: 90px 5% 80px;
-      position: relative; overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute; top: -80px; right: -80px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(232,160,32,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-inner { max-width: 820px; }
-
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      background: rgba(232,160,32,0.15); border: 1px solid rgba(232,160,32,0.35);
-      color: var(--gold2); font-size: 12px; font-weight: 600;
-      padding: 5px 12px; border-radius: 20px; margin-bottom: 22px;
-      letter-spacing: 0.04em; text-transform: uppercase;
-    }
-
-    .hero h1 {
-      font-size: clamp(32px, 5vw, 54px); font-weight: 800;
-      color: var(--white); line-height: 1.15; margin-bottom: 18px;
-      letter-spacing: -0.5px;
-    }
-
+    .hero { background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, var(--blue) 100%); padding: 80px 5% 70px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; top: -80px; right: -80px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(232,160,32,0.12) 0%, transparent 70%); pointer-events: none; }
+    .hero-inner { max-width: 780px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(232,160,32,0.15); border: 1px solid rgba(232,160,32,0.35); color: var(--gold2); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; margin-bottom: 22px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .hero h1 { font-size: clamp(30px, 5vw, 52px); font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 18px; letter-spacing: -0.5px; }
     .hero h1 span { color: var(--gold); }
-
-    .hero p {
-      font-size: clamp(15px, 2vw, 19px); color: rgba(255,255,255,0.8);
-      max-width: 580px; margin-bottom: 36px; line-height: 1.65;
-    }
-
+    .hero p { font-size: clamp(15px, 2vw, 18px); color: rgba(255,255,255,0.8); max-width: 560px; margin-bottom: 32px; }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--gold); color: var(--navy); font-weight: 700; font-size: 16px;
-      padding: 14px 28px; border-radius: var(--radius); text-decoration: none;
-      transition: background 0.2s, transform 0.15s; border: none; cursor: pointer;
-    }
-
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--navy); font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: var(--radius); text-decoration: none; transition: background 0.2s, transform 0.15s; border: none; cursor: pointer; }
     .btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--white); font-weight: 600; font-size: 15px; padding: 14px 24px; border-radius: var(--radius); text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: border-color 0.2s, background 0.2s; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+    .hero-trust { display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.7); font-size: 13px; }
 
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; color: var(--white); font-weight: 600; font-size: 15px;
-      padding: 14px 24px; border-radius: var(--radius); text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.3); transition: border-color 0.2s, background 0.2s;
-    }
-
-    .btn-secondary:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.6); }
-
-    .hero-trust {
-      display: flex; gap: 24px; margin-top: 44px; flex-wrap: wrap;
-    }
-
-    .trust-item {
-      display: flex; align-items: center; gap: 8px;
-      color: rgba(255,255,255,0.7); font-size: 13px;
-    }
-
-    .trust-icon { font-size: 16px; }
-
-    /* ── SECTION WRAPPER ── */
     .section { padding: 72px 5%; }
     .section-alt { background: var(--gray1); }
+    .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--blue); margin-bottom: 10px; }
+    .section-title { font-size: clamp(24px, 3.5vw, 36px); font-weight: 800; color: var(--ink); line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; }
+    .section-sub { font-size: 16px; color: var(--ink3); max-width: 560px; line-height: 1.7; margin-bottom: 48px; }
 
-    .section-label {
-      font-size: 11px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.12em; color: var(--blue); margin-bottom: 10px;
-    }
+    .calc-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .calc-tab { padding: 9px 18px; border-radius: 8px; border: 1px solid var(--gray3); background: var(--white); color: var(--ink2); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
+    .calc-tab:hover { border-color: var(--blue); color: var(--blue); }
+    .calc-tab.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
 
-    .section-title {
-      font-size: clamp(24px, 3.5vw, 36px); font-weight: 800;
-      color: var(--ink); line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px;
-    }
+    .calc-panel { display: none; }
+    .calc-panel.active { display: grid; grid-template-columns: 1fr 340px; gap: 28px; align-items: start; }
+    @media (max-width: 768px) { .calc-panel.active { grid-template-columns: 1fr; } }
 
-    .section-sub {
-      font-size: 16px; color: var(--ink3); max-width: 560px; line-height: 1.7;
-      margin-bottom: 48px;
-    }
+    .calc-inputs { background: var(--white); border: 1px solid var(--gray2); border-radius: 12px; padding: 28px; }
+    .calc-group { margin-bottom: 22px; }
+    .calc-group:last-child { margin-bottom: 0; }
+    .calc-label { display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; color: var(--ink2); margin-bottom: 8px; }
+    .calc-label span { font-weight: 400; color: var(--ink3); }
+    .calc-options { display: flex; gap: 8px; flex-wrap: wrap; }
+    .calc-option { padding: 8px 14px; border-radius: 7px; border: 1px solid var(--gray3); background: var(--white); color: var(--ink2); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+    .calc-option:hover { border-color: var(--blue); color: var(--blue); }
+    .calc-option.selected { background: var(--navy); color: var(--white); border-color: var(--navy); }
 
-    /* ── SERVICES ── */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-    }
+    .calc-toggle { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .toggle-track { width: 40px; height: 22px; border-radius: 11px; background: var(--gray3); position: relative; transition: background 0.2s; flex-shrink: 0; }
+    .toggle-track.on { background: var(--navy); }
+    .toggle-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--white); position: absolute; top: 2px; left: 2px; transition: left 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+    .toggle-track.on .toggle-thumb { left: 20px; }
+    .toggle-label { font-size: 13px; color: var(--ink2); font-weight: 500; }
+    .calc-note { font-size: 11px; color: var(--ink3); margin-top: 8px; line-height: 1.5; }
 
-    .service-card {
-      background: var(--white); border: 1px solid var(--gray2);
-      border-radius: var(--radius); padding: 28px 26px;
-      transition: box-shadow 0.2s, transform 0.2s; cursor: default;
-    }
+    .price-box { background: var(--navy); border-radius: 12px; padding: 28px; position: sticky; top: 84px; }
+    .price-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); margin-bottom: 6px; }
+    .price-amount { font-size: 54px; font-weight: 800; color: var(--gold); line-height: 1; margin-bottom: 4px; letter-spacing: -1px; }
+    .price-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 20px; line-height: 1.6; }
+    .price-items { margin-bottom: 20px; }
+    .price-item { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 13px; color: rgba(255,255,255,0.75); }
+    .price-item:last-child { border-bottom: none; }
+    .price-item-label { flex: 1; }
+    .price-item-val { font-weight: 700; color: var(--white); white-space: nowrap; margin-left: 12px; }
+    .price-total { display: flex; justify-content: space-between; align-items: center; padding: 12px 0 0; font-size: 15px; font-weight: 700; color: var(--white); border-top: 1px solid rgba(255,255,255,0.2); margin-top: 4px; }
+    .price-total-val { color: var(--gold); font-size: 20px; }
+    .book-btn { width: 100%; padding: 14px; background: var(--gold); color: var(--navy); font-weight: 800; font-size: 15px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s, transform 0.15s; margin-top: 16px; }
+    .book-btn:hover { background: var(--gold2); transform: translateY(-1px); }
+    .price-guarantee { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 11px; color: rgba(255,255,255,0.5); text-align: center; justify-content: center; }
 
-    .service-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .modal-overlay { display: none; position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.6); align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--white); border-radius: 14px; padding: 36px; width: 100%; max-width: 460px; position: relative; max-height: 90vh; overflow-y: auto; }
+    .modal-close { position: absolute; top: 16px; right: 16px; background: var(--gray2); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; color: var(--ink3); }
+    .modal h3 { font-size: 20px; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
+    .modal-price-line { font-size: 15px; color: var(--blue); font-weight: 700; margin-bottom: 20px; }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--ink2); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 11px 14px; border: 1px solid var(--gray3); border-radius: 7px; font-family: inherit; font-size: 14px; color: var(--ink); background: var(--white); transition: border-color 0.2s; outline: none; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(30,77,140,0.1); }
+    .form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-submit-btn { width: 100%; padding: 14px; background: var(--navy); color: var(--white); font-weight: 700; font-size: 15px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
+    .form-submit-btn:hover { background: var(--blue); }
+    .form-note-sm { font-size: 11px; color: var(--ink3); text-align: center; margin-top: 8px; }
+    .form-success-msg { display: none; text-align: center; padding: 28px 16px; }
+    .form-success-msg h3 { font-size: 22px; font-weight: 800; color: var(--green); margin-bottom: 8px; }
+    .form-success-msg p { font-size: 14px; color: var(--ink3); }
 
-    .service-card.featured { border-color: var(--gold); position: relative; }
-
-    .featured-badge {
-      position: absolute; top: -10px; left: 20px;
-      background: var(--gold); color: var(--navy); font-size: 10px; font-weight: 700;
-      padding: 3px 10px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.06em;
-    }
-
-    .service-icon { font-size: 30px; margin-bottom: 14px; }
-
-    .service-name {
-      font-size: 17px; font-weight: 700; color: var(--ink); margin-bottom: 6px;
-    }
-
-    .service-desc { font-size: 13px; color: var(--ink3); line-height: 1.6; margin-bottom: 16px; }
-
-    .service-price {
-      display: flex; align-items: baseline; gap: 6px;
-    }
-
-    .price-amount { font-size: 22px; font-weight: 800; color: var(--navy); }
-
-    .price-note { font-size: 12px; color: var(--ink3); }
-
-    .service-tag {
-      display: inline-block; margin-top: 10px;
-      background: var(--gray1); color: var(--blue); font-size: 11px; font-weight: 600;
-      padding: 3px 10px; border-radius: 10px;
-    }
-
-    /* ── HOW IT WORKS ── */
-    .steps-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px;
-    }
-
-    .step {
-      text-align: center; padding: 32px 20px;
-    }
-
-    .step-num {
-      width: 48px; height: 48px; border-radius: 50%;
-      background: var(--navy); color: var(--gold); font-weight: 800; font-size: 20px;
-      display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
-    }
-
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+    .step { text-align: center; padding: 28px 20px; }
+    .step-num { width: 48px; height: 48px; border-radius: 50%; background: var(--navy); color: var(--gold); font-weight: 800; font-size: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
     .step-title { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-
     .step-desc { font-size: 14px; color: var(--ink3); line-height: 1.65; }
 
-    /* ── AREAS ── */
-    .areas-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px;
-    }
-
-    .area-card {
-      background: var(--white); border: 1px solid var(--gray2); border-radius: var(--radius);
-      padding: 20px 22px; transition: box-shadow 0.2s;
-    }
-
-    .area-card:hover { box-shadow: var(--shadow); }
-
-    .area-name { font-weight: 700; font-size: 16px; color: var(--navy); margin-bottom: 4px; }
-
+    .areas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+    .area-card { background: var(--white); border: 1px solid var(--gray2); border-radius: var(--radius); padding: 18px 20px; }
+    .area-name { font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 3px; }
     .area-sub { font-size: 12px; color: var(--ink3); }
 
-    /* ── WHY US ── */
-    .why-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px;
-    }
-
-    .why-item {
-      display: flex; gap: 16px; align-items: flex-start;
-      background: var(--white); border: 1px solid var(--gray2);
-      border-radius: var(--radius); padding: 22px;
-    }
-
-    .why-icon {
-      font-size: 24px; flex-shrink: 0; width: 44px; height: 44px;
-      background: var(--gray1); border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    .why-text h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 5px; }
-
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
+    .why-item { display: flex; gap: 14px; align-items: flex-start; background: var(--white); border: 1px solid var(--gray2); border-radius: var(--radius); padding: 20px; }
+    .why-icon { font-size: 22px; flex-shrink: 0; width: 42px; height: 42px; background: var(--gray1); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+    .why-text h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
     .why-text p { font-size: 13px; color: var(--ink3); line-height: 1.6; }
 
-    /* ── CONTACT / FORM ── */
-    .contact-wrap {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;
-    }
-
-    @media (max-width: 768px) { .contact-wrap { grid-template-columns: 1fr; } }
-
-    .contact-info h2 { font-size: 28px; font-weight: 800; color: var(--ink); margin-bottom: 16px; }
-
-    .contact-info p { font-size: 15px; color: var(--ink3); line-height: 1.7; margin-bottom: 28px; }
-
-    .contact-detail {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 16px; font-size: 15px;
-    }
-
-    .contact-detail .icon {
-      width: 38px; height: 38px; border-radius: 8px; background: var(--navy);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 17px; flex-shrink: 0;
-    }
-
-    .contact-detail strong { color: var(--ink); }
-    .contact-detail span { color: var(--ink3); font-size: 13px; }
-
-    .form-card {
-      background: var(--white); border: 1px solid var(--gray2);
-      border-radius: 12px; padding: 32px; box-shadow: var(--shadow);
-    }
-
-    .form-title { font-size: 18px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
-
-    .form-sub { font-size: 13px; color: var(--ink3); margin-bottom: 24px; }
-
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
-
-    .form-group { margin-bottom: 14px; }
-
-    .form-group label {
-      display: block; font-size: 12px; font-weight: 600; color: var(--ink2);
-      text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%; padding: 11px 14px;
-      border: 1px solid var(--gray3); border-radius: 7px;
-      font-family: inherit; font-size: 14px; color: var(--ink);
-      background: var(--white); transition: border-color 0.2s, box-shadow 0.2s;
-      outline: none;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--blue); box-shadow: 0 0 0 3px rgba(30,77,140,0.1);
-    }
-
-    .form-group textarea { resize: vertical; min-height: 90px; }
-
-    .form-submit {
-      width: 100%; padding: 14px;
-      background: var(--navy); color: var(--white); font-weight: 700; font-size: 15px;
-      border: none; border-radius: 8px; cursor: pointer;
-      transition: background 0.2s, transform 0.15s; margin-top: 4px;
-    }
-
-    .form-submit:hover { background: var(--blue); transform: translateY(-1px); }
-
-    .form-note {
-      font-size: 11px; color: var(--ink3); text-align: center; margin-top: 10px;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--navy); color: rgba(255,255,255,0.65);
-      padding: 40px 5% 30px;
-      display: flex; flex-wrap: wrap; gap: 20px;
-      align-items: center; justify-content: space-between;
-    }
-
+    footer { background: var(--navy); color: rgba(255,255,255,0.65); padding: 36px 5% 28px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
     .footer-logo { color: var(--white); font-weight: 800; font-size: 16px; }
     .footer-logo span { color: var(--gold); }
-
     .footer-links { display: flex; gap: 20px; }
-
-    .footer-links a {
-      color: rgba(255,255,255,0.55); font-size: 13px; text-decoration: none;
-      transition: color 0.2s;
-    }
-
+    .footer-links a { color: rgba(255,255,255,0.55); font-size: 13px; text-decoration: none; }
     .footer-links a:hover { color: var(--white); }
 
-    .footer-copy { font-size: 12px; }
-
-    /* ── PHONE FLOAT ── */
-    .phone-float {
-      position: fixed; bottom: 24px; right: 24px; z-index: 200;
-      background: var(--gold); color: var(--navy); font-weight: 700; font-size: 15px;
-      padding: 14px 22px; border-radius: 50px; box-shadow: 0 6px 24px rgba(0,0,0,0.25);
-      text-decoration: none; display: flex; align-items: center; gap: 8px;
-      transition: transform 0.2s, background 0.2s;
-    }
-
+    .phone-float { position: fixed; bottom: 24px; right: 24px; z-index: 200; background: var(--gold); color: var(--navy); font-weight: 700; font-size: 15px; padding: 13px 20px; border-radius: 50px; box-shadow: 0 6px 24px rgba(0,0,0,0.25); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: transform 0.2s, background 0.2s; }
     .phone-float:hover { background: var(--gold2); transform: scale(1.04); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .hero { padding: 60px 5% 60px; }
-      .hero-actions { flex-direction: column; align-items: flex-start; }
-    }
-
-    /* ── FORM SUCCESS ── */
-    .form-success {
-      display: none; text-align: center; padding: 32px;
-      background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px;
-    }
-
-    .form-success h3 { font-size: 20px; font-weight: 800; color: var(--green); margin-bottom: 8px; }
-
-    .form-success p { font-size: 14px; color: var(--ink3); }
+    @media (max-width: 640px) { .nav-links { display: none; } .hero { padding: 56px 5%; } .hero-actions { flex-direction: column; align-items: flex-start; } }
   </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
 <nav>
-  <a class="nav-logo" href="#home">
-    Lake County <span>Home Services</span>
-  </a>
+  <a class="nav-logo" href="#home">Lake County <span>Home Services</span></a>
   <div class="nav-links">
-    <a href="#services">Services</a>
+    <a href="#pricing">Instant Pricing</a>
     <a href="#areas">Service Areas</a>
-    <a href="#contact">Get a Quote</a>
-    <a href="tel:8475550100" class="nav-cta">📞 Call Now</a>
+    <a href="tel:8475550100" class="nav-cta">Call Now</a>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
 <section class="hero" id="home">
   <div class="hero-inner">
-    <div class="hero-badge">
-      <span>⭐</span> Serving Lake County, IL Since 2026
-    </div>
-    <h1>Lake County's Most<br /><span>Responsive</span> Home Services</h1>
-    <p>Pressure washing, junk removal, pet waste removal, and more — for Lake Forest, Libertyville, Vernon Hills, Grayslake, and Mundelein homeowners. We answer the phone. We show up. We guarantee the work.</p>
+    <div class="hero-badge">⚡ See your price in seconds — no forms required</div>
+    <h1>Instant Pricing.<br /><span>No Runaround.</span></h1>
+    <p>Pick your service below and see your exact price right now — before you give us anything. Pressure washing, junk removal, pet waste, windows, gutters. Lake County, IL.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn-primary">
-        📋 Get a Free Quote
-      </a>
-      <a href="tel:8475550100" class="btn-secondary">
-        📞 (847) 555-0100
-      </a>
+      <a href="#pricing" class="btn-primary">Get My Price Now</a>
+      <a href="tel:8475550100" class="btn-secondary">📞 (847) 555-0100</a>
     </div>
     <div class="hero-trust">
-      <div class="trust-item"><span class="trust-icon">✅</span> Fully Insured</div>
-      <div class="trust-item"><span class="trust-icon">⚡</span> 5-Minute Response Guarantee</div>
-      <div class="trust-item"><span class="trust-icon">🏠</span> 49,000+ Homes Served Area</div>
-      <div class="trust-item"><span class="trust-icon">💳</span> Pay After Service Complete</div>
+      <span class="trust-item">✅ Fully Insured</span>
+      <span class="trust-item">⚡ 5-Min Response</span>
+      <span class="trust-item">💳 Pay After Service</span>
+      <span class="trust-item">🏠 Lake County Only</span>
     </div>
   </div>
 </section>
 
-<!-- ── SERVICES ── -->
-<section class="section" id="services">
-  <div class="section-label">What We Do</div>
-  <div class="section-title">Professional Home Services,<br />Done Right the First Time</div>
-  <p class="section-sub">All services are fully insured. We only work with vetted, background-checked local technicians. You get a quote upfront — no surprises at the door.</p>
+<section class="section" id="pricing">
+  <div class="section-label">Instant Pricing</div>
+  <div class="section-title">Your Price. Right Now.</div>
+  <p class="section-sub">No estimate requests. No waiting for a callback. Pick your service, answer 2–3 questions, see exactly what you'll pay.</p>
 
-  <div class="services-grid">
+  <div class="calc-tabs">
+    <button class="calc-tab active" onclick="switchCalc('pressure',this)">💦 Pressure Washing</button>
+    <button class="calc-tab" onclick="switchCalc('junk',this)">🚛 Junk Removal</button>
+    <button class="calc-tab" onclick="switchCalc('petwaste',this)">🐾 Pet Waste</button>
+    <button class="calc-tab" onclick="switchCalc('windows',this)">🪟 Window Cleaning</button>
+    <button class="calc-tab" onclick="switchCalc('gutters',this)">🍂 Gutter Cleaning</button>
+  </div>
 
-    <div class="service-card featured">
-      <div class="featured-badge">Most Popular</div>
-      <div class="service-icon">💦</div>
-      <div class="service-name">Pressure Washing</div>
-      <div class="service-desc">House exterior, driveway, deck, fence, and patio. We remove years of dirt, mold, and grime in hours.</div>
-      <div class="service-price">
-        <span class="price-amount">$175</span>
-        <span class="price-note">starting price</span>
+  <!-- PRESSURE WASHING -->
+  <div class="calc-panel active" id="calc-pressure">
+    <div class="calc-inputs">
+      <div class="calc-group">
+        <div class="calc-label">What needs washing? <span>Select all that apply</span></div>
+        <div class="calc-options" id="pw-surfaces">
+          <div class="calc-option selected" data-val="house" onclick="pwToggleSurface(this)">House Exterior</div>
+          <div class="calc-option" data-val="driveway" onclick="pwToggleSurface(this)">Driveway</div>
+          <div class="calc-option" data-val="deck" onclick="pwToggleSurface(this)">Deck / Patio</div>
+          <div class="calc-option" data-val="fence" onclick="pwToggleSurface(this)">Fence</div>
+          <div class="calc-option" data-val="sidewalk" onclick="pwToggleSurface(this)">Sidewalk</div>
+        </div>
       </div>
-      <span class="service-tag">Spring special available</span>
-    </div>
-
-    <div class="service-card">
-      <div class="service-icon">🚛</div>
-      <div class="service-name">Junk Removal</div>
-      <div class="service-desc">Furniture, appliances, construction debris, garage cleanouts. We haul it all — same day or next day.</div>
-      <div class="service-price">
-        <span class="price-amount">$290</span>
-        <span class="price-note">half load starting</span>
+      <div class="calc-group" id="pw-stories-group">
+        <div class="calc-label">Home stories</div>
+        <div class="calc-options" id="pw-stories">
+          <div class="calc-option selected" data-val="1" onclick="selectOption(this,'pw-stories');pwCalc()">1 Story</div>
+          <div class="calc-option" data-val="2" onclick="selectOption(this,'pw-stories');pwCalc()">2 Stories</div>
+          <div class="calc-option" data-val="3" onclick="selectOption(this,'pw-stories');pwCalc()">3+ Stories</div>
+        </div>
       </div>
-      <span class="service-tag">Same-day available</span>
-    </div>
-
-    <div class="service-card">
-      <div class="service-icon">🐾</div>
-      <div class="service-name">Pet Waste Removal</div>
-      <div class="service-desc">Weekly yard cleanup so you stop dreading the backyard. Set it and forget it — subscribe monthly.</div>
-      <div class="service-price">
-        <span class="price-amount">$95</span>
-        <span class="price-note">/month recurring</span>
+      <div class="calc-group" id="pw-size-group">
+        <div class="calc-label">Home size <span>approximate</span></div>
+        <div class="calc-options" id="pw-size">
+          <div class="calc-option" data-val="sm" onclick="selectOption(this,'pw-size');pwCalc()">Under 1,500 sq ft</div>
+          <div class="calc-option selected" data-val="md" onclick="selectOption(this,'pw-size');pwCalc()">1,500–2,500 sq ft</div>
+          <div class="calc-option" data-val="lg" onclick="selectOption(this,'pw-size');pwCalc()">2,500–4,000 sq ft</div>
+          <div class="calc-option" data-val="xl" onclick="selectOption(this,'pw-size');pwCalc()">4,000+ sq ft</div>
+        </div>
       </div>
-      <span class="service-tag">Cancel anytime</span>
-    </div>
-
-    <div class="service-card">
-      <div class="service-icon">🪟</div>
-      <div class="service-name">Window Cleaning</div>
-      <div class="service-desc">Interior and exterior window cleaning. Crystal clear results for your whole home — inside and out.</div>
-      <div class="service-price">
-        <span class="price-amount">$200</span>
-        <span class="price-note">starting price</span>
+      <div class="calc-group">
+        <div class="calc-label">Any add-ons?</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <label class="calc-toggle" onclick="pwToggleAddon('heavy')">
+            <div class="toggle-track" id="toggle-heavy"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Heavy mold / algae staining (3+ years)</span>
+          </label>
+          <label class="calc-toggle" onclick="pwToggleAddon('gutter_bright')">
+            <div class="toggle-track" id="toggle-gutter_bright"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Gutter brightening (exterior gutter faces)</span>
+          </label>
+        </div>
       </div>
-      <span class="service-tag">Available May–Sept</span>
+      <div class="calc-note">Prices match professional-grade hot water equipment rates in Lake County. Bundle 3+ surfaces for 10% off.</div>
     </div>
+    <div class="price-box">
+      <div class="price-label">Your Estimated Price</div>
+      <div class="price-amount" id="pw-price-amt">$299</div>
+      <div class="price-sub" id="pw-price-sub">House exterior · 1 story · avg size</div>
+      <div class="price-items" id="pw-price-items"></div>
+      <button class="book-btn" onclick="openBook('Pressure Washing','pw-price-amt')">Book This Job</button>
+      <div class="price-guarantee">🔒 Price locked at booking · Pay after completion</div>
+    </div>
+  </div>
 
-    <div class="service-card">
-      <div class="service-icon">🍂</div>
-      <div class="service-name">Gutter Cleaning</div>
-      <div class="service-desc">Full gutter flush and downspout clearing before the Illinois winter. Prevents ice dams and foundation damage.</div>
-      <div class="service-price">
-        <span class="price-amount">$175</span>
-        <span class="price-note">starting price</span>
+  <!-- JUNK REMOVAL -->
+  <div class="calc-panel" id="calc-junk">
+    <div class="calc-inputs">
+      <div class="calc-group">
+        <div class="calc-label">How much junk? <span>pick one</span></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div class="calc-option" data-val="min" onclick="junkSelectSize(this)">📦 Minimum — a few small items (fits in a car trunk)</div>
+          <div class="calc-option selected" data-val="quarter" onclick="junkSelectSize(this)">📦📦 Quarter truck — couple pieces of furniture or boxes</div>
+          <div class="calc-option" data-val="half" onclick="junkSelectSize(this)">🚛 Half truck — small room cleanout or garage items</div>
+          <div class="calc-option" data-val="full" onclick="junkSelectSize(this)">🚛🚛 Full truck — full room, basement, or garage cleanout</div>
+          <div class="calc-option" data-val="xl" onclick="junkSelectSize(this)">🏠 Full truck + overflow — whole-home or estate cleanout</div>
+        </div>
       </div>
-      <span class="service-tag">Fall booking open</span>
+      <div class="calc-group">
+        <div class="calc-label">Heavy items? <span>extra disposal fee</span></div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <label class="calc-toggle" onclick="junkToggle('appliance')">
+            <div class="toggle-track" id="toggle-appliance"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Appliance (washer, dryer, fridge) +$55</span>
+          </label>
+          <label class="calc-toggle" onclick="junkToggle('mattress')">
+            <div class="toggle-track" id="toggle-mattress"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Mattress / box spring +$30</span>
+          </label>
+          <label class="calc-toggle" onclick="junkToggle('tv')">
+            <div class="toggle-track" id="toggle-tv"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">TV / electronics +$25</span>
+          </label>
+          <label class="calc-toggle" onclick="junkToggle('tires')">
+            <div class="toggle-track" id="toggle-tires"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Tires (set of 4) +$40</span>
+          </label>
+        </div>
+      </div>
+      <div class="calc-note">Same-day removal available most days. Final price confirmed on-site — if load is smaller, you pay less.</div>
     </div>
+    <div class="price-box">
+      <div class="price-label">Your Estimated Price</div>
+      <div class="price-amount" id="junk-price-amt">$175</div>
+      <div class="price-sub" id="junk-price-sub">Quarter truck · no heavy items</div>
+      <div class="price-items" id="junk-price-items"></div>
+      <button class="book-btn" onclick="openBook('Junk Removal','junk-price-amt')">Book This Job</button>
+      <div class="price-guarantee">🔒 Final confirmed on-site · Pay after completion</div>
+    </div>
+  </div>
 
+  <!-- PET WASTE -->
+  <div class="calc-panel" id="calc-petwaste">
+    <div class="calc-inputs">
+      <div class="calc-group">
+        <div class="calc-label">How many dogs?</div>
+        <div class="calc-options" id="pet-dogs">
+          <div class="calc-option selected" data-val="1" onclick="selectOption(this,'pet-dogs');petCalc()">1 Dog</div>
+          <div class="calc-option" data-val="2" onclick="selectOption(this,'pet-dogs');petCalc()">2 Dogs</div>
+          <div class="calc-option" data-val="3" onclick="selectOption(this,'pet-dogs');petCalc()">3 Dogs</div>
+          <div class="calc-option" data-val="4" onclick="selectOption(this,'pet-dogs');petCalc()">4+ Dogs</div>
+        </div>
+      </div>
+      <div class="calc-group">
+        <div class="calc-label">Service frequency</div>
+        <div class="calc-options" id="pet-freq">
+          <div class="calc-option selected" data-val="weekly" onclick="selectOption(this,'pet-freq');petCalc()">Weekly</div>
+          <div class="calc-option" data-val="biweekly" onclick="selectOption(this,'pet-freq');petCalc()">Every 2 Weeks</div>
+          <div class="calc-option" data-val="monthly" onclick="selectOption(this,'pet-freq');petCalc()">Monthly</div>
+        </div>
+      </div>
+      <div class="calc-group">
+        <div class="calc-label">Yard size</div>
+        <div class="calc-options" id="pet-yard">
+          <div class="calc-option selected" data-val="sm" onclick="selectOption(this,'pet-yard');petCalc()">Standard (under ¼ acre)</div>
+          <div class="calc-option" data-val="lg" onclick="selectOption(this,'pet-yard');petCalc()">Large (¼–½ acre)</div>
+          <div class="calc-option" data-val="xl" onclick="selectOption(this,'pet-yard');petCalc()">Very Large (½ acre+)</div>
+        </div>
+      </div>
+      <div class="calc-note">Month-to-month subscription. Cancel anytime. First visit includes a catch-up clean at no extra charge.</div>
+    </div>
+    <div class="price-box">
+      <div class="price-label">Your Monthly Price</div>
+      <div class="price-amount" id="pet-price-amt">$95</div>
+      <div class="price-sub" id="pet-price-sub">1 dog · weekly · standard yard</div>
+      <div class="price-items" id="pet-price-items"></div>
+      <button class="book-btn" onclick="openBook('Pet Waste Removal','pet-price-amt')">Start My Subscription</button>
+      <div class="price-guarantee">🔒 Month-to-month · Cancel anytime · No contracts</div>
+    </div>
+  </div>
+
+  <!-- WINDOWS -->
+  <div class="calc-panel" id="calc-windows">
+    <div class="calc-inputs">
+      <div class="calc-group">
+        <div class="calc-label">Number of windows <span>count distinct panes outside</span></div>
+        <div class="calc-options" id="win-count">
+          <div class="calc-option" data-val="8" onclick="selectOption(this,'win-count');winCalc()">Up to 8</div>
+          <div class="calc-option selected" data-val="15" onclick="selectOption(this,'win-count');winCalc()">9–15</div>
+          <div class="calc-option" data-val="22" onclick="selectOption(this,'win-count');winCalc()">16–22</div>
+          <div class="calc-option" data-val="30" onclick="selectOption(this,'win-count');winCalc()">23–30</div>
+          <div class="calc-option" data-val="40" onclick="selectOption(this,'win-count');winCalc()">30+</div>
+        </div>
+      </div>
+      <div class="calc-group">
+        <div class="calc-label">What's included?</div>
+        <div class="calc-options" id="win-type">
+          <div class="calc-option" data-val="ext" onclick="selectOption(this,'win-type');winCalc()">Exterior Only</div>
+          <div class="calc-option selected" data-val="both" onclick="selectOption(this,'win-type');winCalc()">Interior + Exterior</div>
+        </div>
+      </div>
+      <div class="calc-group">
+        <div class="calc-label">Home stories</div>
+        <div class="calc-options" id="win-stories">
+          <div class="calc-option selected" data-val="1" onclick="selectOption(this,'win-stories');winCalc()">1 Story</div>
+          <div class="calc-option" data-val="2" onclick="selectOption(this,'win-stories');winCalc()">2 Stories</div>
+        </div>
+      </div>
+      <div class="calc-group">
+        <div class="calc-label">Add-ons</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <label class="calc-toggle" onclick="winToggle('screens')">
+            <div class="toggle-track" id="toggle-screens"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Screen cleaning +$3/screen</span>
+          </label>
+          <label class="calc-toggle" onclick="winToggle('tracks')">
+            <div class="toggle-track" id="toggle-tracks"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Track and sill detail +$2/window</span>
+          </label>
+        </div>
+      </div>
+      <div class="calc-note">Water-fed pole systems and squeegee finish. Streak-free guarantee.</div>
+    </div>
+    <div class="price-box">
+      <div class="price-label">Your Estimated Price</div>
+      <div class="price-amount" id="win-price-amt">$229</div>
+      <div class="price-sub" id="win-price-sub">9–15 windows · interior + exterior · 1 story</div>
+      <div class="price-items" id="win-price-items"></div>
+      <button class="book-btn" onclick="openBook('Window Cleaning','win-price-amt')">Book This Job</button>
+      <div class="price-guarantee">🔒 Price locked at booking · Pay after completion</div>
+    </div>
+  </div>
+
+  <!-- GUTTERS -->
+  <div class="calc-panel" id="calc-gutters">
+    <div class="calc-inputs">
+      <div class="calc-group">
+        <div class="calc-label">Home size</div>
+        <div class="calc-options" id="gut-size">
+          <div class="calc-option" data-val="sm" onclick="selectOption(this,'gut-size');gutCalc()">Under 1,500 sq ft</div>
+          <div class="calc-option selected" data-val="md" onclick="selectOption(this,'gut-size');gutCalc()">1,500–2,500 sq ft</div>
+          <div class="calc-option" data-val="lg" onclick="selectOption(this,'gut-size');gutCalc()">2,500–4,000 sq ft</div>
+          <div class="calc-option" data-val="xl" onclick="selectOption(this,'gut-size');gutCalc()">4,000+ sq ft</div>
+        </div>
+      </div>
+      <div class="calc-group">
+        <div class="calc-label">Home stories</div>
+        <div class="calc-options" id="gut-stories">
+          <div class="calc-option selected" data-val="1" onclick="selectOption(this,'gut-stories');gutCalc()">1 Story</div>
+          <div class="calc-option" data-val="2" onclick="selectOption(this,'gut-stories');gutCalc()">2 Stories</div>
+          <div class="calc-option" data-val="3" onclick="selectOption(this,'gut-stories');gutCalc()">3 Stories</div>
+        </div>
+      </div>
+      <div class="calc-group">
+        <div class="calc-label">Add-ons</div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <label class="calc-toggle" onclick="gutToggle('guards')">
+            <div class="toggle-track" id="toggle-guards"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Gutter guard inspection +$35</span>
+          </label>
+          <label class="calc-toggle" onclick="gutToggle('minor')">
+            <div class="toggle-track" id="toggle-minor"><div class="toggle-thumb"></div></div>
+            <span class="toggle-label">Minor re-sealing and leak repair +$65</span>
+          </label>
+        </div>
+      </div>
+      <div class="calc-note">Downspout flush always included free. Best time to book: September–November before Illinois freeze.</div>
+    </div>
+    <div class="price-box">
+      <div class="price-label">Your Estimated Price</div>
+      <div class="price-amount" id="gut-price-amt">$179</div>
+      <div class="price-sub" id="gut-price-sub">1,500–2,500 sq ft · 1 story · downspout flush included</div>
+      <div class="price-items" id="gut-price-items"></div>
+      <button class="book-btn" onclick="openBook('Gutter Cleaning','gut-price-amt')">Book This Job</button>
+      <div class="price-guarantee">🔒 Price guaranteed at booking · Pay after completion</div>
+    </div>
   </div>
 </section>
 
-<!-- ── HOW IT WORKS ── -->
 <section class="section section-alt">
   <div class="section-label">The Process</div>
-  <div class="section-title">Booked in Minutes.<br />Done by Tomorrow.</div>
-  <p class="section-sub">No waiting on hold. No three-quote runaround. We make it easy from the first call to the final walkthrough.</p>
-
+  <div class="section-title">Booked in Minutes. Done by Tomorrow.</div>
+  <p class="section-sub">You see the price first. Then decide. No callbacks required just to get a number.</p>
   <div class="steps-grid">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-title">Call or Submit a Quote</div>
-      <div class="step-desc">Call (847) 555-0100 or fill out the form below. We respond within 5 minutes during business hours — and after hours via AI answering.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-title">Get a Firm Quote</div>
-      <div class="step-desc">No "I'll have to come out and look." We give you a confirmed price upfront — pressure washing by address, junk removal by load size.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-title">We Show Up & Do the Work</div>
-      <div class="step-desc">A vetted local technician arrives at the confirmed time. You don't lift a finger. Fully insured, background-checked crew.</div>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <div class="step-title">Pay After You're Satisfied</div>
-      <div class="step-desc">We collect payment via card or Zelle only after the job is done and you're happy. No deposit required for most jobs.</div>
-    </div>
+    <div class="step"><div class="step-num">1</div><div class="step-title">See Your Price</div><div class="step-desc">Pick your service, answer 2–3 questions, get your exact price instantly — no forms required.</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-title">Book in 60 Seconds</div><div class="step-desc">Just your name, phone, and preferred date. We confirm within 5 minutes.</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-title">We Show Up</div><div class="step-desc">Vetted, insured local technician arrives on time. You don't lift a finger.</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-title">Pay After</div><div class="step-desc">Card or Zelle after the job is done. No deposit. No surprises.</div></div>
   </div>
 </section>
 
-<!-- ── SERVICE AREAS ── -->
 <section class="section" id="areas">
   <div class="section-label">Where We Work</div>
   <div class="section-title">All of Lake County, IL</div>
-  <p class="section-sub">Based in Grayslake, we serve the full north-suburban corridor. If you're in Lake County, we come to you.</p>
-
+  <p class="section-sub">Based in Grayslake. If you're in Lake County, we come to you.</p>
   <div class="areas-grid">
-    <div class="area-card">
-      <div class="area-name">Lake Forest</div>
-      <div class="area-sub">Median income $228K · Est. 1857</div>
-    </div>
-    <div class="area-card">
-      <div class="area-name">Libertyville</div>
-      <div class="area-sub">Median income $162K · 20,000+ residents</div>
-    </div>
-    <div class="area-card">
-      <div class="area-name">Vernon Hills</div>
-      <div class="area-sub">Median income $120K · Growing suburb</div>
-    </div>
-    <div class="area-card">
-      <div class="area-name">Grayslake</div>
-      <div class="area-sub">Our home base · 20,000+ residents</div>
-    </div>
-    <div class="area-card">
-      <div class="area-name">Mundelein</div>
-      <div class="area-sub">Median income $107K · 31,000+ residents</div>
-    </div>
-    <div class="area-card">
-      <div class="area-name">Lake Zurich</div>
-      <div class="area-sub">Wauconda · Round Lake · and more</div>
-    </div>
+    <div class="area-card"><div class="area-name">Lake Forest</div><div class="area-sub">Median income $228K</div></div>
+    <div class="area-card"><div class="area-name">Libertyville</div><div class="area-sub">Median income $162K</div></div>
+    <div class="area-card"><div class="area-name">Vernon Hills</div><div class="area-sub">Median income $120K</div></div>
+    <div class="area-card"><div class="area-name">Grayslake</div><div class="area-sub">Our home base</div></div>
+    <div class="area-card"><div class="area-name">Mundelein</div><div class="area-sub">Median income $107K</div></div>
+    <div class="area-card"><div class="area-name">Lake Zurich + more</div><div class="area-sub">All of Lake County</div></div>
   </div>
 </section>
 
-<!-- ── WHY US ── -->
 <section class="section section-alt">
   <div class="section-label">Why Choose Us</div>
   <div class="section-title">Built for Lake County Homeowners</div>
-  <p class="section-sub">We built this company because the dominant "two-man operation" doesn't answer its phone on weekends. We do.</p>
-
   <div class="why-grid">
-    <div class="why-item">
-      <div class="why-icon">⚡</div>
-      <div class="why-text">
-        <h4>5-Minute Response</h4>
-        <p>AI answering after hours so you're never sent to voicemail. Every lead gets a callback within minutes.</p>
-      </div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">🛡️</div>
-      <div class="why-text">
-        <h4>Fully Insured</h4>
-        <p>Every technician carries liability insurance naming Partna Company LLC as additional insured. Your home is protected.</p>
-      </div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">💰</div>
-      <div class="why-text">
-        <h4>No Deposit, Pay After</h4>
-        <p>We don't collect payment until you've seen the finished work and you're satisfied. Zero risk on your end.</p>
-      </div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">📱</div>
-      <div class="why-text">
-        <h4>Digital Booking</h4>
-        <p>Book online, receive a confirmation text, track your job, and pay via card — all without a single paper form.</p>
-      </div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">🏅</div>
-      <div class="why-text">
-        <h4>Vetted Local Crews</h4>
-        <p>We only work with technicians we've vetted and dispatched ourselves. Background-checked, reviewed, and local.</p>
-      </div>
-    </div>
-    <div class="why-item">
-      <div class="why-icon">🔄</div>
-      <div class="why-text">
-        <h4>Satisfaction Guarantee</h4>
-        <p>If the job doesn't meet your expectations, we send someone back — at no additional charge.</p>
-      </div>
-    </div>
+    <div class="why-item"><div class="why-icon">⚡</div><div class="why-text"><h4>5-Minute Response</h4><p>AI answering after hours. Every booking confirmed within 5 minutes during business hours.</p></div></div>
+    <div class="why-item"><div class="why-icon">🛡️</div><div class="why-text"><h4>Fully Insured</h4><p>Every technician carries liability insurance naming Partna Company LLC as additionally insured.</p></div></div>
+    <div class="why-item"><div class="why-icon">💰</div><div class="why-text"><h4>No Deposit, Pay After</h4><p>We don't collect a cent until you've seen the finished work and you're satisfied.</p></div></div>
+    <div class="why-item"><div class="why-icon">🏅</div><div class="why-text"><h4>Vetted Local Crews</h4><p>Background-checked, reviewed Lake County technicians — not random contractors from an app.</p></div></div>
   </div>
 </section>
 
-<!-- ── CONTACT ── -->
-<section class="section" id="contact">
-  <div class="contact-wrap">
-
-    <div class="contact-info">
-      <div class="section-label">Get a Free Quote</div>
-      <h2>We'll Get Back<br />to You in 5 Minutes</h2>
-      <p>Tell us what you need and where you're located. We'll respond with a firm quote — no in-person visit required for most services.</p>
-
-      <div class="contact-detail">
-        <div class="icon">📞</div>
-        <div>
-          <strong>(847) 555-0100</strong><br />
-          <span>Mon–Sat 7am–8pm · After-hours AI answering</span>
-        </div>
-      </div>
-      <div class="contact-detail">
-        <div class="icon">📧</div>
-        <div>
-          <strong>hello@lakecountyhomeservices.com</strong><br />
-          <span>We respond to all emails within the hour</span>
-        </div>
-      </div>
-      <div class="contact-detail">
-        <div class="icon">📍</div>
-        <div>
-          <strong>Grayslake, IL 60030</strong><br />
-          <span>Serving all of Lake County</span>
-        </div>
-      </div>
-
-      <div style="margin-top: 28px; padding: 18px 20px; background: var(--gray1); border-radius: 10px; border-left: 3px solid var(--gold);">
-        <div style="font-weight: 700; font-size: 14px; color: var(--ink); margin-bottom: 5px;">Spring Pressure Washing Special</div>
-        <div style="font-size: 13px; color: var(--ink3); line-height: 1.6;">Book a full house wash before May 31st and get driveway included free. Mention SPRING26 when you call or in the form.</div>
-      </div>
-    </div>
-
-    <div class="form-card">
-      <div class="form-title">Request a Free Quote</div>
-      <div class="form-sub">We'll follow up within 5 minutes during business hours</div>
-
-      <div class="form-success" id="form-success">
-        <h3>✅ Quote Request Received!</h3>
-        <p>We'll call or text you back within 5 minutes. Thank you for choosing Lake County Home Services.</p>
-      </div>
-
-      <form
-        name="contact"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        id="quote-form"
-        onsubmit="handleSubmit(event)"
-      >
-        <input type="hidden" name="form-name" value="contact" />
-        <input type="hidden" name="bot-field" style="display:none" />
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fname">First Name *</label>
-            <input type="text" id="fname" name="first_name" required placeholder="Jane" />
-          </div>
-          <div class="form-group">
-            <label for="lname">Last Name *</label>
-            <input type="text" id="lname" name="last_name" required placeholder="Smith" />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="phone">Phone *</label>
-            <input type="tel" id="phone" name="phone" required placeholder="(847) 555-0100" />
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="jane@email.com" />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="service">Service Needed *</label>
-          <select id="service" name="service" required>
-            <option value="">— Select a service —</option>
-            <option value="Pressure Washing">Pressure Washing</option>
-            <option value="Junk Removal">Junk Removal</option>
-            <option value="Pet Waste Removal">Pet Waste Removal (Subscription)</option>
-            <option value="Window Cleaning">Window Cleaning</option>
-            <option value="Gutter Cleaning">Gutter Cleaning</option>
-            <option value="Multiple / Other">Multiple or Other</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="city">City / Town *</label>
-          <select id="city" name="city" required>
-            <option value="">— Select your city —</option>
-            <option>Lake Forest</option>
-            <option>Libertyville</option>
-            <option>Vernon Hills</option>
-            <option>Grayslake</option>
-            <option>Mundelein</option>
-            <option>Lake Zurich</option>
-            <option>Wauconda</option>
-            <option>Round Lake</option>
-            <option>Other Lake County</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="message">Tell Us More (optional)</label>
-          <textarea id="message" name="message" placeholder="e.g. 2-story house, full driveway, garage included — mention SPRING26 for the promo..."></textarea>
-        </div>
-
-        <button type="submit" class="form-submit">
-          📋 Send My Quote Request
-        </button>
-        <div class="form-note">No spam. We'll only contact you about your request.</div>
-      </form>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-logo">Lake County <span>Home Services</span></div>
   <div class="footer-links">
-    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
     <a href="#areas">Areas</a>
-    <a href="#contact">Get a Quote</a>
-    <a href="tel:8475550100">Call (847) 555-0100</a>
+    <a href="tel:8475550100">(847) 555-0100</a>
   </div>
-  <div class="footer-copy">© 2026 Partna Company LLC · Grayslake, IL · Fully Insured</div>
+  <div>© 2026 Partna Company LLC · Grayslake, IL · Fully Insured</div>
 </footer>
 
-<!-- ── FLOATING PHONE BUTTON ── -->
-<a href="tel:8475550100" class="phone-float">
-  📞 Call for a Quote
-</a>
+<a href="tel:8475550100" class="phone-float">📞 Call for a Quote</a>
+
+<!-- BOOK MODAL -->
+<div class="modal-overlay" id="modal" onclick="handleModalClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>Book Your Job</h3>
+    <div class="modal-price-line" id="modal-price-line">Pressure Washing — $299</div>
+    <div class="form-success-msg" id="book-success">
+      <h3>✅ You're Booked!</h3>
+      <p>We'll call or text to confirm within 5 minutes. Thank you!</p>
+    </div>
+    <form name="booking" method="POST" data-netlify="true" id="book-form" onsubmit="submitBook(event)">
+      <input type="hidden" name="form-name" value="booking" />
+      <input type="hidden" name="service_and_price" id="hidden-service" />
+      <div class="form-row2">
+        <div class="form-group"><label>First Name</label><input type="text" name="first_name" required placeholder="Jane" /></div>
+        <div class="form-group"><label>Last Name</label><input type="text" name="last_name" required placeholder="Smith" /></div>
+      </div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" name="phone" required placeholder="(847) 555-1234" /></div>
+      <div class="form-group"><label>Preferred Date</label><input type="date" name="preferred_date" /></div>
+      <div class="form-group">
+        <label>City</label>
+        <select name="city" required>
+          <option value="">Select your city</option>
+          <option>Lake Forest</option><option>Libertyville</option><option>Vernon Hills</option>
+          <option>Grayslake</option><option>Mundelein</option><option>Lake Zurich</option>
+          <option>Wauconda</option><option>Round Lake</option><option>Other Lake County</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Notes (optional)</label><textarea name="notes" rows="2" placeholder="Gate code, dog in yard, anything else..."></textarea></div>
+      <button type="submit" class="form-submit-btn">Confirm My Booking</button>
+      <div class="form-note-sm">We confirm by call or text within 5 minutes · Pay only after completion</div>
+    </form>
+  </div>
+</div>
 
 <script>
-  function handleSubmit(e) {
-    e.preventDefault();
-    const form = document.getElementById('quote-form');
-    const successBox = document.getElementById('form-success');
+// ── STATE ──
+var pwSurfaces = new Set(['house']);
+var pwAddons   = { heavy: false, gutter_bright: false };
+var junkSize   = 'quarter';
+var junkAddons = { appliance: false, mattress: false, tv: false, tires: false };
+var winAddons  = { screens: false, tracks: false };
+var gutAddons  = { guards: false, minor: false };
 
-    const data = new FormData(form);
+// ── HELPERS ──
+function selectOption(el, groupId) {
+  var opts = document.getElementById(groupId).querySelectorAll('.calc-option');
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
+  el.classList.add('selected');
+}
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(data).toString()
-    })
-    .then(() => {
-      form.style.display = 'none';
-      successBox.style.display = 'block';
-      successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    })
-    .catch(() => {
-      // Fallback: still show success (Netlify usually processes even if fetch fails)
-      form.style.display = 'none';
-      successBox.style.display = 'block';
-    });
+function getSelected(groupId) {
+  var el = document.getElementById(groupId).querySelector('.selected');
+  return el ? el.dataset.val : null;
+}
+
+function setToggle(id, val) {
+  var track = document.getElementById('toggle-' + id);
+  if (track) track.classList.toggle('on', val);
+}
+
+function switchCalc(id, btn) {
+  var tabs = document.querySelectorAll('.calc-tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  btn.classList.add('active');
+  var panels = document.querySelectorAll('.calc-panel');
+  for (var i = 0; i < panels.length; i++) panels[i].classList.remove('active');
+  document.getElementById('calc-' + id).classList.add('active');
+}
+
+// ── PRICE BOX RENDERER ──
+function renderPrice(amtId, subId, itemsId, total, subText, lines) {
+  var amtEl   = document.getElementById(amtId);
+  var subEl   = document.getElementById(subId);
+  var itemsEl = document.getElementById(itemsId);
+  if (!amtEl) return;
+
+  amtEl.textContent = '$' + total.toLocaleString();
+  subEl.textContent = subText;
+  itemsEl.textContent = '';
+
+  for (var i = 0; i < lines.length; i++) {
+    var row = document.createElement('div');
+    row.className = 'price-item';
+
+    var lbl = document.createElement('span');
+    lbl.className = 'price-item-label';
+    lbl.textContent = lines[i].label;
+
+    var val = document.createElement('span');
+    val.className = 'price-item-val';
+    val.textContent = lines[i].amount === 0 ? 'Free' : (lines[i].amount < 0 ? '-$' + Math.abs(lines[i].amount) : '$' + lines[i].amount);
+
+    row.appendChild(lbl);
+    row.appendChild(val);
+    itemsEl.appendChild(row);
   }
-</script>
 
+  var totRow = document.createElement('div');
+  totRow.className = 'price-total';
+  var totLbl = document.createElement('span');
+  totLbl.textContent = 'Total';
+  var totVal = document.createElement('span');
+  totVal.className = 'price-total-val';
+  totVal.textContent = '$' + total.toLocaleString();
+  totRow.appendChild(totLbl);
+  totRow.appendChild(totVal);
+  itemsEl.appendChild(totRow);
+}
+
+// ── PRESSURE WASHING ──
+function pwToggleSurface(el) {
+  var val = el.dataset.val;
+  if (pwSurfaces.has(val)) {
+    if (pwSurfaces.size === 1) return;
+    pwSurfaces.delete(val);
+    el.classList.remove('selected');
+  } else {
+    pwSurfaces.add(val);
+    el.classList.add('selected');
+  }
+  var hasHouse = pwSurfaces.has('house');
+  document.getElementById('pw-stories-group').style.display = hasHouse ? '' : 'none';
+  document.getElementById('pw-size-group').style.display    = hasHouse ? '' : 'none';
+  pwCalc();
+}
+
+function pwToggleAddon(key) {
+  pwAddons[key] = !pwAddons[key];
+  setToggle(key, pwAddons[key]);
+  pwCalc();
+}
+
+function pwCalc() {
+  var BASE   = { sm: 229, md: 299, lg: 379, xl: 479 };
+  var STORY  = { '1': 0, '2': 100, '3': 200 };
+  var SURF   = { driveway: 149, deck: 149, fence: 99, sidewalk: 79 };
+  var LABELS = { driveway: 'Driveway', deck: 'Deck / Patio', fence: 'Fence', sidewalk: 'Sidewalk' };
+
+  var size    = getSelected('pw-size') || 'md';
+  var stories = getSelected('pw-stories') || '1';
+  var lines   = [];
+  var total   = 0;
+
+  if (pwSurfaces.has('house')) {
+    var base = BASE[size] + STORY[stories];
+    lines.push({ label: 'House exterior wash', amount: base });
+    total += base;
+  }
+
+  var extras = ['driveway','deck','fence','sidewalk'];
+  for (var i = 0; i < extras.length; i++) {
+    var s = extras[i];
+    if (pwSurfaces.has(s)) {
+      var price = pwSurfaces.has('house') ? Math.round(SURF[s] * 0.75) : SURF[s];
+      var label = LABELS[s] + (pwSurfaces.has('house') ? ' (bundled)' : '');
+      lines.push({ label: label, amount: price });
+      total += price;
+    }
+  }
+
+  if (pwAddons.heavy)        { lines.push({ label: 'Heavy staining treatment', amount: 75 }); total += 75; }
+  if (pwAddons.gutter_bright){ lines.push({ label: 'Gutter brightening', amount: 49 });       total += 49; }
+
+  if (pwSurfaces.size >= 3) {
+    var disc = -Math.round(total * 0.1);
+    lines.push({ label: 'Multi-surface discount (10%)', amount: disc });
+    total += disc;
+  }
+
+  var subText = Array.from(pwSurfaces).join(', ') + ' · fully insured · pay after completion';
+  renderPrice('pw-price-amt','pw-price-sub','pw-price-items', total, subText, lines);
+}
+
+// ── JUNK REMOVAL ──
+var JUNK_BASE   = { min: 99, quarter: 175, half: 299, full: 499, xl: 699 };
+var JUNK_LABELS = { min: 'Minimum load', quarter: 'Quarter truck', half: 'Half truck', full: 'Full truck', xl: 'Full truck + overflow' };
+
+function junkSelectSize(el) {
+  var opts = document.querySelectorAll('#calc-junk .calc-option');
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('selected');
+  el.classList.add('selected');
+  junkSize = el.dataset.val;
+  junkCalc();
+}
+
+function junkToggle(key) {
+  junkAddons[key] = !junkAddons[key];
+  setToggle(key, junkAddons[key]);
+  junkCalc();
+}
+
+function junkCalc() {
+  var ADDON_P = { appliance: 55, mattress: 30, tv: 25, tires: 40 };
+  var ADDON_L = { appliance: 'Appliance disposal', mattress: 'Mattress / box spring', tv: 'TV / electronics', tires: 'Tire set (4)' };
+
+  var lines = [{ label: JUNK_LABELS[junkSize], amount: JUNK_BASE[junkSize] }];
+  var total = JUNK_BASE[junkSize];
+  var keys  = ['appliance','mattress','tv','tires'];
+
+  for (var i = 0; i < keys.length; i++) {
+    if (junkAddons[keys[i]]) {
+      lines.push({ label: ADDON_L[keys[i]], amount: ADDON_P[keys[i]] });
+      total += ADDON_P[keys[i]];
+    }
+  }
+  renderPrice('junk-price-amt','junk-price-sub','junk-price-items', total, 'Final confirmed on-site · pay after completion', lines);
+}
+
+// ── PET WASTE ──
+function petCalc() {
+  var dogs = parseInt(getSelected('pet-dogs') || '1');
+  var freq = getSelected('pet-freq') || 'weekly';
+  var yard = getSelected('pet-yard') || 'sm';
+
+  var BASE     = { weekly: 95, biweekly: 60, monthly: 35 };
+  var DOG_ADD  = [0, 0, 18, 34, 48];
+  var YARD_ADD = { sm: 0, lg: 15, xl: 30 };
+  var FREQ_LBL = { weekly: 'Weekly visits', biweekly: 'Every 2 weeks', monthly: 'Monthly visit' };
+  var YARD_LBL = { sm: 'Standard yard', lg: 'Large yard', xl: 'Very large yard' };
+
+  var base    = BASE[freq];
+  var dogAdd  = DOG_ADD[Math.min(dogs, 4)];
+  var yardAdd = YARD_ADD[yard];
+  var total   = base + dogAdd + yardAdd;
+  var lines   = [{ label: FREQ_LBL[freq], amount: base }];
+
+  if (dogAdd)  lines.push({ label: dogs + ' dogs (extra)', amount: dogAdd });
+  if (yardAdd) lines.push({ label: YARD_LBL[yard] + ' (extra)', amount: yardAdd });
+
+  renderPrice('pet-price-amt','pet-price-sub','pet-price-items', total, 'Per month · cancel anytime · no contracts', lines);
+}
+
+// ── WINDOWS ──
+function winToggle(key) {
+  winAddons[key] = !winAddons[key];
+  setToggle(key, winAddons[key]);
+  winCalc();
+}
+
+function winCalc() {
+  var count   = parseInt(getSelected('win-count') || '15');
+  var type    = getSelected('win-type') || 'both';
+  var stories = getSelected('win-stories') || '1';
+
+  var perWin = (type === 'both') ? 14 : 9;
+  var base   = count * perWin;
+  if (stories === '2') base = Math.round(base * 1.2);
+
+  var typeLabel = (type === 'both') ? 'Interior + exterior' : 'Exterior only';
+  var lines = [{ label: count + ' windows · ' + typeLabel, amount: base }];
+  var total = base;
+
+  if (winAddons.screens) { var s = Math.round(count * 3); lines.push({ label: 'Screen cleaning', amount: s }); total += s; }
+  if (winAddons.tracks)  { var t = Math.round(count * 2); lines.push({ label: 'Track and sill detail', amount: t }); total += t; }
+
+  renderPrice('win-price-amt','win-price-sub','win-price-items', total, 'Streak-free guarantee · pay after completion', lines);
+}
+
+// ── GUTTERS ──
+function gutToggle(key) {
+  gutAddons[key] = !gutAddons[key];
+  setToggle(key, gutAddons[key]);
+  gutCalc();
+}
+
+function gutCalc() {
+  var size    = getSelected('gut-size') || 'md';
+  var stories = getSelected('gut-stories') || '1';
+
+  var BASE      = { sm: 129, md: 179, lg: 239, xl: 299 };
+  var STORY_ADD = { '1': 0, '2': 60, '3': 120 };
+  var SIZE_LBL  = { sm: 'Under 1,500 sq ft', md: '1,500–2,500 sq ft', lg: '2,500–4,000 sq ft', xl: '4,000+ sq ft' };
+
+  var base  = BASE[size] + STORY_ADD[stories];
+  var lines = [
+    { label: SIZE_LBL[size], amount: base },
+    { label: 'Downspout flush', amount: 0 }
+  ];
+  var total = base;
+
+  if (gutAddons.guards) { lines.push({ label: 'Gutter guard inspection', amount: 35 }); total += 35; }
+  if (gutAddons.minor)  { lines.push({ label: 'Minor re-sealing', amount: 65 });         total += 65; }
+
+  renderPrice('gut-price-amt','gut-price-sub','gut-price-items', total, 'Downspout flush included · pay after completion', lines);
+}
+
+// ── MODAL ──
+function openBook(serviceName, priceId) {
+  var priceText = serviceName + ' — ' + document.getElementById(priceId).textContent;
+  document.getElementById('modal-price-line').textContent = priceText;
+  document.getElementById('hidden-service').value = priceText;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleModalClick(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+function submitBook(e) {
+  e.preventDefault();
+  var form = document.getElementById('book-form');
+  var data = new FormData(form);
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(data).toString()
+  }).then(function() {
+    form.style.display = 'none';
+    document.getElementById('book-success').style.display = 'block';
+  }).catch(function() {
+    form.style.display = 'none';
+    document.getElementById('book-success').style.display = 'block';
+  });
+}
+
+// ── INIT ──
+pwCalc(); junkCalc(); petCalc(); winCalc(); gutCalc();
+</script>
 </body>
 </html>
