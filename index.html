@@ -240,11 +240,11 @@
         <div style="display:flex;flex-direction:column;gap:10px">
           <label class="calc-toggle" onclick="pwToggleAddon('heavy')">
             <div class="toggle-track" id="toggle-heavy"><div class="toggle-thumb"></div></div>
-            <span class="toggle-label">Heavy mold / algae staining (3+ years)</span>
+            <span class="toggle-label">Heavy mold / algae staining (3+ years) +$89</span>
           </label>
           <label class="calc-toggle" onclick="pwToggleAddon('gutter_bright')">
             <div class="toggle-track" id="toggle-gutter_bright"><div class="toggle-thumb"></div></div>
-            <span class="toggle-label">Gutter brightening (exterior gutter faces)</span>
+            <span class="toggle-label">Gutter brightening (exterior gutter faces) +$59</span>
           </label>
         </div>
       </div>
@@ -278,11 +278,11 @@
         <div style="display:flex;flex-direction:column;gap:10px">
           <label class="calc-toggle" onclick="junkToggle('appliance')">
             <div class="toggle-track" id="toggle-appliance"><div class="toggle-thumb"></div></div>
-            <span class="toggle-label">Appliance (washer, dryer, fridge) +$55</span>
+            <span class="toggle-label">Appliance (washer, dryer, fridge) +$65</span>
           </label>
           <label class="calc-toggle" onclick="junkToggle('mattress')">
             <div class="toggle-track" id="toggle-mattress"><div class="toggle-thumb"></div></div>
-            <span class="toggle-label">Mattress / box spring +$30</span>
+            <span class="toggle-label">Mattress / box spring +$35</span>
           </label>
           <label class="calc-toggle" onclick="junkToggle('tv')">
             <div class="toggle-track" id="toggle-tv"><div class="toggle-thumb"></div></div>
@@ -627,9 +627,9 @@ function pwToggleAddon(key) {
 }
 
 function pwCalc() {
-  var BASE   = { sm: 229, md: 299, lg: 379, xl: 479 };
-  var STORY  = { '1': 0, '2': 100, '3': 200 };
-  var SURF   = { driveway: 149, deck: 149, fence: 99, sidewalk: 79 };
+  var BASE   = { sm: 259, md: 339, lg: 429, xl: 539 };
+  var STORY  = { '1': 0, '2': 130, '3': 260 };
+  var SURF   = { driveway: 179, deck: 179, fence: 119, sidewalk: 99 };
   var LABELS = { driveway: 'Driveway', deck: 'Deck / Patio', fence: 'Fence', sidewalk: 'Sidewalk' };
 
   var size    = getSelected('pw-size') || 'md';
@@ -654,8 +654,8 @@ function pwCalc() {
     }
   }
 
-  if (pwAddons.heavy)        { lines.push({ label: 'Heavy staining treatment', amount: 75 }); total += 75; }
-  if (pwAddons.gutter_bright){ lines.push({ label: 'Gutter brightening', amount: 49 });       total += 49; }
+  if (pwAddons.heavy)        { lines.push({ label: 'Heavy staining treatment', amount: 89 }); total += 89; }
+  if (pwAddons.gutter_bright){ lines.push({ label: 'Gutter brightening', amount: 59 });       total += 59; }
 
   if (pwSurfaces.size >= 3) {
     var disc = -Math.round(total * 0.1);
@@ -668,7 +668,7 @@ function pwCalc() {
 }
 
 // ── JUNK REMOVAL ──
-var JUNK_BASE   = { min: 99, quarter: 175, half: 299, full: 499, xl: 699 };
+var JUNK_BASE   = { min: 129, quarter: 229, half: 349, full: 549, xl: 749 };
 var JUNK_LABELS = { min: 'Minimum load', quarter: 'Quarter truck', half: 'Half truck', full: 'Full truck', xl: 'Full truck + overflow' };
 
 function junkSelectSize(el) {
@@ -686,7 +686,7 @@ function junkToggle(key) {
 }
 
 function junkCalc() {
-  var ADDON_P = { appliance: 55, mattress: 30, tv: 25, tires: 40 };
+  var ADDON_P = { appliance: 65, mattress: 35, tv: 25, tires: 40 };
   var ADDON_L = { appliance: 'Appliance disposal', mattress: 'Mattress / box spring', tv: 'TV / electronics', tires: 'Tire set (4)' };
 
   var lines = [{ label: JUNK_LABELS[junkSize], amount: JUNK_BASE[junkSize] }];
@@ -708,9 +708,9 @@ function petCalc() {
   var freq = getSelected('pet-freq') || 'weekly';
   var yard = getSelected('pet-yard') || 'sm';
 
-  var BASE     = { weekly: 95, biweekly: 60, monthly: 35 };
-  var DOG_ADD  = [0, 0, 18, 34, 48];
-  var YARD_ADD = { sm: 0, lg: 15, xl: 30 };
+  var BASE     = { weekly: 109, biweekly: 69, monthly: 39 };
+  var DOG_ADD  = [0, 0, 22, 40, 58];
+  var YARD_ADD = { sm: 0, lg: 20, xl: 42 };
   var FREQ_LBL = { weekly: 'Weekly visits', biweekly: 'Every 2 weeks', monthly: 'Monthly visit' };
   var YARD_LBL = { sm: 'Standard yard', lg: 'Large yard', xl: 'Very large yard' };
 
@@ -738,7 +738,7 @@ function winCalc() {
   var type    = getSelected('win-type') || 'both';
   var stories = getSelected('win-stories') || '1';
 
-  var perWin = (type === 'both') ? 14 : 9;
+  var perWin = (type === 'both') ? 18 : 12;
   var base   = count * perWin;
   if (stories === '2') base = Math.round(base * 1.2);
 
@@ -763,8 +763,8 @@ function gutCalc() {
   var size    = getSelected('gut-size') || 'md';
   var stories = getSelected('gut-stories') || '1';
 
-  var BASE      = { sm: 129, md: 179, lg: 239, xl: 299 };
-  var STORY_ADD = { '1': 0, '2': 60, '3': 120 };
+  var BASE      = { sm: 149, md: 219, lg: 279, xl: 349 };
+  var STORY_ADD = { '1': 0, '2': 75, '3': 150 };
   var SIZE_LBL  = { sm: 'Under 1,500 sq ft', md: '1,500–2,500 sq ft', lg: '2,500–4,000 sq ft', xl: '4,000+ sq ft' };
 
   var base  = BASE[size] + STORY_ADD[stories];
