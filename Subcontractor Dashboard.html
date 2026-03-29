@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subcontractor CRM — Partna Company</title>
+<style>
+:root{
+  --bg:#0f1117;--surface:#1a1d27;--surface2:#222636;--surface3:#2a2f44;
+  --border:#2e3248;--border2:#3a3f5c;
+  --accent:#4f7cff;--green:#22c55e;--yellow:#f59e0b;--red:#ef4444;
+  --blue:#3b82f6;--purple:#a855f7;--orange:#f97316;--teal:#14b8a6;
+  --text:#e2e8f0;--text2:#94a3b8;--muted:#6b7280;
+  --radius:8px;--shadow:0 4px 24px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── HEADER ── */
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;gap:0;height:56px}
+.logo{font-size:15px;font-weight:800;letter-spacing:-.01em;white-space:nowrap;padding-right:28px;border-right:1px solid var(--border)}
+.logo span{color:var(--accent)}
+.tabs{display:flex;gap:0;margin-left:0;height:100%}
+.tab{padding:0 20px;height:100%;border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;position:relative;display:flex;align-items:center;gap:7px;white-space:nowrap;transition:color .15s}
+.tab:hover{color:var(--text)}
+.tab.on{color:var(--text)}
+.tab.on::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent)}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.header-right .badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;background:rgba(34,197,94,.15);color:var(--green)}
+
+/* ── SUMMARY BAR ── */
+.summary{display:flex;align-items:center;gap:0;padding:0 32px;border-bottom:1px solid var(--border);background:var(--surface);overflow-x:auto}
+.sstat{padding:14px 20px;border-right:1px solid var(--border);flex-shrink:0;min-width:110px}
+.sstat:first-child{border-left:none}.sstat:last-child{border-right:none}
+.sstat .lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:3px}
+.sstat .val{font-size:20px;font-weight:800;line-height:1}
+.sstat .delta{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* ── TOOLBAR ── */
+.toolbar{display:flex;gap:8px;padding:12px 32px;border-bottom:1px solid var(--border);align-items:center;flex-wrap:wrap;background:var(--bg)}
+.tb-btn{padding:5px 12px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;font-size:12px;font-weight:600;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:5px}
+.tb-btn:hover{background:var(--surface2);color:var(--text);border-color:var(--border2)}
+.tb-btn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.tb-div{width:1px;height:18px;background:var(--border);margin:0 2px}
+.tb-search{margin-left:auto;padding:6px 12px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:12px;width:200px;outline:none}
+.tb-search:focus{border-color:var(--accent)}
+.tb-select{padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-size:12px;cursor:pointer;outline:none}
+
+/* ── VIEWS ── */
+.view{display:none}.view.on{display:block}
+
+/* ── PIPELINE (KANBAN) ── */
+.pipeline-wrap{padding:24px 32px;overflow-x:auto}
+.pipeline{display:flex;gap:14px;min-width:max-content}
+.col{background:var(--surface);border:1px solid var(--border);border-radius:12px;width:280px;flex-shrink:0;display:flex;flex-direction:column;max-height:calc(100vh - 220px)}
+.col-header{padding:14px 16px;border-bottom:1px solid var(--border);flex-shrink:0}
+.col-title{display:flex;align-items:center;justify-content:space-between}
+.col-name{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.col-count{font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px}
+.col-meta{font-size:11px;color:var(--muted);margin-top:4px}
+.col-body{overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px;flex:1}
+
+/* Pipeline card */
+.pcard{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;cursor:pointer;transition:all .12s;border-left:3px solid var(--border)}
+.pcard:hover{background:var(--surface3);border-color:var(--border2);transform:translateY(-1px);box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.pcard.nw{border-left-color:var(--green)}.pcard.mw{border-left-color:var(--yellow)}
+.pcard-name{font-size:13px;font-weight:600;margin-bottom:6px;line-height:1.3}
+.pcard-tags{display:flex;flex-wrap:wrap;gap:3px;margin-bottom:6px}
+.ptag{font-size:9px;padding:1px 6px;border-radius:8px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.pcard-meta{display:flex;align-items:center;justify-content:space-between;font-size:10px;color:var(--muted)}
+.pcard-kpi{display:flex;gap:8px;margin-top:6px;padding-top:6px;border-top:1px solid var(--border)}
+.pcard-kpi span{font-size:10px;color:var(--muted)}
+.pcard-kpi .kv{font-weight:700;color:var(--text2)}
+.pcard-actions{display:flex;gap:5px;margin-top:8px}
+.pa-btn{flex:1;padding:4px 6px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:10px;cursor:pointer;transition:all .12s}
+.pa-btn:hover{background:var(--surface);color:var(--text)}
+.pa-btn.advance{border-color:rgba(79,124,255,.4);color:var(--accent)}.pa-btn.advance:hover{background:rgba(79,124,255,.1)}
+.pa-btn.log{border-color:rgba(168,85,247,.4);color:var(--purple)}.pa-btn.log:hover{background:rgba(168,85,247,.1)}
+.pa-btn.hist{border-color:rgba(245,158,11,.4);color:var(--yellow)}.pa-btn.hist:hover{background:rgba(245,158,11,.1)}
+
+/* ── LIST VIEW ── */
+.list-wrap{padding:0 32px 24px}
+.list-table{width:100%;border-collapse:collapse;font-size:13px}
+.list-table th{text-align:left;padding:10px 14px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:1px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap;position:sticky;top:0;background:var(--bg)}
+.list-table th:hover{color:var(--text)}
+.list-table th .sort-icon{margin-left:4px;opacity:.4}
+.list-table th.sort-asc .sort-icon::after{content:'↑';opacity:1}
+.list-table th.sort-desc .sort-icon::after{content:'↓';opacity:1}
+.list-table td{padding:10px 14px;border-bottom:1px solid rgba(46,50,72,.5);vertical-align:middle}
+.list-table tr:hover td{background:rgba(79,124,255,.04)}
+.list-name{font-weight:600;cursor:pointer;color:var(--text)}.list-name:hover{color:var(--accent)}
+.list-phone{color:var(--green);cursor:pointer;font-size:12px}.list-phone:hover{text-decoration:underline}
+.coi-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.coi-dot.on{background:var(--green)}.coi-dot.off{background:var(--red)}
+
+/* ── ANALYTICS ── */
+.analytics-wrap{padding:24px 32px;display:flex;flex-direction:column;gap:24px}
+.an-row{display:grid;gap:16px}
+.an-row.cols-4{grid-template-columns:repeat(4,1fr)}
+.an-row.cols-2{grid-template-columns:1fr 1fr}
+.an-row.cols-3{grid-template-columns:repeat(3,1fr)}
+.an-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+.an-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:16px}
+.an-kpi{font-size:32px;font-weight:800;margin-bottom:4px}
+.an-kpi-sub{font-size:12px;color:var(--muted)}
+
+/* Funnel */
+.funnel{display:flex;flex-direction:column;gap:8px}
+.funnel-row{display:flex;align-items:center;gap:12px}
+.funnel-label{font-size:12px;color:var(--text2);width:110px;flex-shrink:0;text-align:right}
+.funnel-bar-wrap{flex:1;background:var(--surface2);border-radius:4px;height:24px;overflow:hidden;position:relative}
+.funnel-bar{height:100%;border-radius:4px;transition:width .6s ease;display:flex;align-items:center;padding-left:8px}
+.funnel-bar-val{font-size:11px;font-weight:700;color:#fff}
+.funnel-count{font-size:12px;color:var(--muted);width:30px;text-align:right;flex-shrink:0}
+
+/* Bar chart */
+.bar-chart{display:flex;flex-direction:column;gap:10px}
+.bc-row{display:flex;align-items:center;gap:10px}
+.bc-label{font-size:11px;color:var(--text2);width:130px;flex-shrink:0;text-align:right}
+.bc-bar-wrap{flex:1;background:var(--surface2);border-radius:4px;height:20px}
+.bc-bar{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 8px;transition:width .5s ease;min-width:2px}
+.bc-val{font-size:10px;font-weight:700;color:#fff;white-space:nowrap}
+.bc-amt{font-size:11px;color:var(--muted);width:60px;text-align:right;flex-shrink:0}
+
+/* Top subs table */
+.top-table{width:100%;border-collapse:collapse;font-size:12px}
+.top-table th{text-align:left;padding:6px 10px;font-size:10px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border)}
+.top-table td{padding:8px 10px;border-bottom:1px solid rgba(46,50,72,.4)}
+.top-table tr:last-child td{border-bottom:none}
+.rank-num{width:24px;height:24px;border-radius:50%;background:var(--surface2);display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--muted)}
+.rank-1{background:rgba(251,191,36,.15);color:#fbbf24}
+.rank-2{background:rgba(156,163,175,.15);color:#9ca3af}
+.rank-3{background:rgba(234,88,12,.15);color:#ea580c}
+
+/* ── ACTIVITY FEED ── */
+.activity-wrap{padding:24px 32px}
+.activity-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.activity-title{font-size:14px;font-weight:700}
+.act-count{font-size:12px;color:var(--muted)}
+.act-table{width:100%;border-collapse:collapse;font-size:13px}
+.act-table th{text-align:left;padding:9px 14px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);border-bottom:1px solid var(--border)}
+.act-table td{padding:10px 14px;border-bottom:1px solid rgba(46,50,72,.4)}
+.act-table tr:hover td{background:rgba(79,124,255,.04)}
+.act-empty{text-align:center;padding:48px;color:var(--muted);font-size:13px}
+
+/* ── BADGES / TAGS ── */
+.sbadge{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;padding:2px 7px;border-radius:4px;cursor:pointer;border:none;flex-shrink:0}
+.sbadge.new{background:rgba(79,124,255,.15);color:var(--accent)}
+.sbadge.contacted{background:rgba(245,158,11,.15);color:var(--yellow)}
+.sbadge.active{background:rgba(34,197,94,.15);color:var(--green)}
+.sbadge.inactive{background:rgba(107,114,128,.15);color:var(--muted)}
+.ws-badge{font-size:10px;padding:2px 7px;border-radius:4px;display:inline-flex;align-items:center;gap:3px}
+.ws-badge.nw{background:rgba(34,197,94,.1);color:var(--green)}
+.ws-badge.mw{background:rgba(245,158,11,.1);color:var(--yellow)}
+
+/* ── MODALS ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
+.modal-wide{max-width:720px}
+.modal-title{font-size:17px;font-weight:700;margin-bottom:4px}
+.modal-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:5px;font-weight:700}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:14px;outline:none;font-family:inherit}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent)}
+.form-group textarea{resize:vertical;min-height:60px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal-actions{display:flex;gap:10px;margin-top:20px}
+.btn-primary{padding:9px 20px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:14px;font-weight:600;cursor:pointer}
+.btn-primary:hover{background:#3d6bff}
+.btn-ghost{padding:9px 20px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:14px;cursor:pointer}
+.btn-ghost:hover{background:var(--surface2);color:var(--text)}
+.btn-delete{padding:3px 8px;border-radius:4px;border:1px solid rgba(239,68,68,.3);background:transparent;color:var(--red);font-size:11px;cursor:pointer}
+.btn-delete:hover{background:rgba(239,68,68,.1)}
+.kpi-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.kpi-tile{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;min-width:90px;flex:1}
+.kpi-tile-label{font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:4px;font-weight:700}
+.kpi-tile-val{font-size:18px;font-weight:800}
+.history-table-wrap{overflow-x:auto}
+.history-table{width:100%;border-collapse:collapse;font-size:12px}
+.history-table th{text-align:left;padding:7px 10px;font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--border)}
+.history-table td{padding:8px 10px;border-bottom:1px solid rgba(46,50,72,.5);vertical-align:top}
+.history-empty{color:var(--muted);font-size:13px;padding:24px 0;text-align:center}
+
+/* ── DISPATCH CENTER ── */
+.dispatch-wrap{padding:24px 32px;display:flex;flex-direction:column;gap:24px}
+.dispatch-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.dispatch-title{font-size:18px;font-weight:700}
+.dispatch-subtitle{font-size:13px;color:var(--muted);margin-top:2px}
+.dispatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.dcat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px}
+.dcat-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.dcat-name{font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px}
+.dcat-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(34,197,94,.15);color:var(--green)}
+.dcat-badge.none{background:rgba(239,68,68,.12);color:var(--red)}
+.dsub-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.dsub-row{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:10px}
+.dsub-name{font-size:12px;font-weight:600;flex:1}
+.dsub-phone{font-size:11px;color:var(--green)}
+.dsub-empty{font-size:12px;color:var(--muted);font-style:italic;padding:8px 0}
+.dispatch-sms-btn{padding:4px 10px;border-radius:6px;border:1px solid rgba(79,124,255,.4);background:transparent;color:var(--accent);font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap}
+.dispatch-sms-btn:hover{background:rgba(79,124,255,.1)}
+.dispatch-sms-btn.copied{border-color:var(--green);color:var(--green)}
+.dispatch-form-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+.dispatch-form-title{font-size:14px;font-weight:700;margin-bottom:4px}
+.dispatch-form-sub{font-size:12px;color:var(--muted);margin-bottom:16px}
+.dispatch-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.dispatch-form-row.full{grid-template-columns:1fr}
+.dispatch-label{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700;margin-bottom:4px;display:block}
+.dispatch-input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;color:var(--text);font-size:13px;outline:none;font-family:inherit}
+.dispatch-input:focus{border-color:var(--accent)}
+.dispatch-preview{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:14px;font-size:12px;line-height:1.7;color:var(--text2);white-space:pre-wrap;min-height:80px;margin-top:12px;font-family:monospace}
+.dispatch-log-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+.dispatch-log-title{font-size:14px;font-weight:700;margin-bottom:12px}
+.dlog-table{width:100%;border-collapse:collapse;font-size:12px}
+.dlog-table th{text-align:left;padding:7px 10px;font-size:10px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border)}
+.dlog-table td{padding:8px 10px;border-bottom:1px solid rgba(46,50,72,.4)}
+.dlog-empty{color:var(--muted);font-size:12px;padding:16px 0;text-align:center;font-style:italic}
+.hidden{display:none!important}
+@media(max-width:700px){.header,.summary,.toolbar,.pipeline-wrap,.list-wrap,.analytics-wrap,.activity-wrap{padding-left:14px;padding-right:14px}.an-row.cols-4{grid-template-columns:1fr 1fr}.an-row.cols-2,.an-row.cols-3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ───────── HEADER ───────── -->
+<div class="header">
+  <div class="logo">Partna <span>CRM</span> · Lake County</div>
+  <div class="tabs" id="mainTabs">
+    <button class="tab on" data-view="pipeline">📋 Pipeline</button>
+    <button class="tab" data-view="contacts">👥 Contacts</button>
+    <button class="tab" data-view="analytics">📊 Analytics</button>
+    <button class="tab" data-view="activity">⚡ Activity</button>
+    <button class="tab" data-view="dispatch">🚀 Dispatch</button>
+  </div>
+  <div class="header-right">
+    <span class="badge" id="globalCOI">0 COIs on file</span>
+    <button class="btn-primary" style="font-size:12px;padding:6px 14px" onclick="openLog(null,null)">+ Log Job</button>
+  </div>
+</div>
+
+<!-- ───────── SUMMARY BAR ───────── -->
+<div class="summary">
+  <div class="sstat"><div class="lbl">Open Leads</div><div class="val" id="sNL" style="color:var(--accent)">—</div><div class="delta">pipeline</div></div>
+  <div class="sstat"><div class="lbl">Contacted</div><div class="val" id="sCT" style="color:var(--yellow)">—</div><div class="delta">awaiting reply</div></div>
+  <div class="sstat"><div class="lbl">Active Subs</div><div class="val" id="sAS" style="color:var(--green)">—</div><div class="delta">confirmed</div></div>
+  <div class="sstat"><div class="lbl">Closed / Won</div><div class="val" id="sWON" style="color:var(--purple)">—</div><div class="delta">≥1 job done</div></div>
+  <div class="sstat"><div class="lbl">Win Rate</div><div class="val" id="sWIN" style="color:var(--teal)">—%</div><div class="delta">contacted→active</div></div>
+  <div class="sstat" style="border-left:1px solid var(--border)"><div class="lbl">Jobs Done</div><div class="val" id="sJobs" style="color:var(--purple)">—</div><div class="delta">all subs</div></div>
+  <div class="sstat"><div class="lbl">Partna Revenue</div><div class="val" id="sRev" style="color:var(--green)">$0</div><div class="delta">gross collected</div></div>
+  <div class="sstat"><div class="lbl">Paid to Subs</div><div class="val" id="sPay" style="color:var(--yellow)">$0</div><div class="delta">Zelle out</div></div>
+  <div class="sstat"><div class="lbl">Avg Margin</div><div class="val" id="sMargin" style="color:var(--teal)">—%</div><div class="delta">across all jobs</div></div>
+  <div class="sstat"><div class="lbl">✅ No Website</div><div class="val" style="color:var(--green)">4</div><div class="delta">prime targets</div></div>
+</div>
+
+<!-- ───────── TOOLBAR ───────── -->
+<div class="toolbar" id="toolbar">
+  <button class="tb-btn on" data-filter="all">All</button>
+  <button class="tb-btn" data-filter="nw">✅ No Website</button>
+  <button class="tb-btn" data-filter="mw">⚠️ Minimal Web</button>
+  <div class="tb-div"></div>
+  <button class="tb-btn" data-filter="cat-pressure">🔵 Pressure</button>
+  <button class="tb-btn" data-filter="cat-junk">🟠 Junk</button>
+  <button class="tb-btn" data-filter="cat-window">🟣 Window</button>
+  <button class="tb-btn" data-filter="cat-gutter">🩵 Gutter</button>
+  <button class="tb-btn" data-filter="cat-pet">🩷 Pet</button>
+  <button class="tb-btn" data-filter="cat-holiday">🔴 Holiday</button>
+  <div class="tb-div"></div>
+  <select class="tb-select" id="sortSel" onchange="render()">
+    <option value="priority">Sort: Priority First</option>
+    <option value="name">Sort: Name A–Z</option>
+    <option value="jobs">Sort: Most Jobs</option>
+    <option value="revenue">Sort: Most Revenue</option>
+    <option value="stars">Sort: Highest Rated</option>
+    <option value="reviews">Sort: Most Reviews</option>
+  </select>
+  <input class="tb-search" type="text" id="searchInput" placeholder="🔍 Search name, phone, category…">
+</div>
+
+<!-- ───────── VIEW: PIPELINE ───────── -->
+<div class="view on" id="view-pipeline">
+  <div class="pipeline-wrap">
+    <div class="pipeline" id="pipelineBoard"></div>
+  </div>
+</div>
+
+<!-- ───────── VIEW: CONTACTS ───────── -->
+<div class="view" id="view-contacts">
+  <div style="padding:24px 32px" id="contactsGrid"></div>
+</div>
+
+<!-- ───────── VIEW: ANALYTICS ───────── -->
+<div class="view" id="view-analytics">
+  <div class="analytics-wrap" id="analyticsPane"></div>
+</div>
+
+<!-- ───────── VIEW: ACTIVITY ───────── -->
+<div class="view" id="view-activity">
+  <div class="activity-wrap">
+    <div class="activity-header">
+      <div class="activity-title">All Job Activity</div>
+      <div class="act-count" id="actCount">—</div>
+    </div>
+    <div id="activityPane"></div>
+  </div>
+</div>
+
+<!-- ───────── VIEW: DISPATCH ───────── -->
+<div class="view" id="view-dispatch">
+  <div class="dispatch-wrap">
+    <div class="dispatch-header">
+      <div>
+        <div class="dispatch-title">🚀 Dispatch Center</div>
+        <div class="dispatch-subtitle">Active subs by category · Generate SMS dispatch messages · Track outbound</div>
+      </div>
+    </div>
+
+    <!-- New Job Composer -->
+    <div class="dispatch-form-card">
+      <div class="dispatch-form-title">New Incoming Job</div>
+      <div class="dispatch-form-sub">Fill in job details → auto-generates the SMS to send to your sub</div>
+      <div class="dispatch-form-row">
+        <div>
+          <label class="dispatch-label">Service Category</label>
+          <select class="dispatch-input" id="dispatchCat" onchange="updateDispatchPreview()">
+            <option value="pressure">🔵 Pressure Washing</option>
+            <option value="junk">🟠 Junk Removal</option>
+            <option value="window">🟣 Window Cleaning</option>
+            <option value="gutter">🩵 Gutter Cleaning</option>
+            <option value="pet">🩷 Pet Waste Removal</option>
+            <option value="holiday">🔴 Holiday Lighting</option>
+          </select>
+        </div>
+        <div>
+          <label class="dispatch-label">Job Date</label>
+          <input type="date" class="dispatch-input" id="dispatchDate" onchange="updateDispatchPreview()">
+        </div>
+      </div>
+      <div class="dispatch-form-row">
+        <div>
+          <label class="dispatch-label">Customer Address</label>
+          <input type="text" class="dispatch-input" id="dispatchAddr" placeholder="123 Main St, Libertyville" oninput="updateDispatchPreview()">
+        </div>
+        <div>
+          <label class="dispatch-label">Job Value (your price to customer)</label>
+          <input type="number" class="dispatch-input" id="dispatchPrice" placeholder="350" oninput="updateDispatchPreview()">
+        </div>
+      </div>
+      <div class="dispatch-form-row full">
+        <div>
+          <label class="dispatch-label">Notes / Scope</label>
+          <input type="text" class="dispatch-input" id="dispatchNotes" placeholder="2-story, detached garage, customer wants driveway included" oninput="updateDispatchPreview()">
+        </div>
+      </div>
+      <label class="dispatch-label" style="margin-top:4px">SMS Preview — Copy and send to your sub</label>
+      <div class="dispatch-preview" id="dispatchPreview">Fill in the fields above to generate your dispatch SMS…</div>
+      <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+        <button class="btn-primary" id="dispatchCopyBtn" onclick="copyDispatchSMS()" style="font-size:12px;padding:8px 18px">📋 Copy SMS</button>
+        <button class="btn-primary" onclick="logDispatch()" style="font-size:12px;padding:8px 18px;background:var(--green)">✅ Mark as Dispatched</button>
+      </div>
+    </div>
+
+    <!-- Active Subs by Category -->
+    <div>
+      <div class="dispatch-form-title" style="margin-bottom:14px">Active Subs by Category</div>
+      <div class="dispatch-grid" id="dispatchGrid"></div>
+    </div>
+
+    <!-- Dispatch Log -->
+    <div class="dispatch-log-card">
+      <div class="dispatch-log-title">Dispatch Log</div>
+      <div id="dispatchLogPane"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ───────── LOG JOB MODAL ───────── -->
+<div id="logModal" class="modal-overlay hidden">
+  <div class="modal">
+    <div class="modal-title">Log Dispatched Job</div>
+    <div class="modal-sub" id="logModalSub">Select contractor below</div>
+    <div class="form-group" id="logSubGroup">
+      <label>Contractor</label>
+      <select id="logSubSel"></select>
+    </div>
+    <div class="form-group">
+      <label>Date</label>
+      <input type="date" id="jobDate">
+    </div>
+    <div class="form-group">
+      <label>Service Type</label>
+      <select id="jobService">
+        <option>Pressure Washing</option>
+        <option>Junk Removal</option>
+        <option>Window Cleaning</option>
+        <option>Gutter Cleaning</option>
+        <option>Pet Waste Removal</option>
+        <option>Holiday Lighting</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Job Value (customer paid)</label>
+        <input type="number" id="jobPrice" placeholder="350" min="0" step="5">
+      </div>
+      <div class="form-group">
+        <label>Sub Payout (auto 50%)</label>
+        <input type="number" id="jobPayout" placeholder="175" min="0" step="5">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Notes</label>
+      <textarea id="jobNotes" rows="2" placeholder="Address, scope, customer name…"></textarea>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-primary" onclick="saveJob()">Save Job</button>
+      <button class="btn-ghost" onclick="closeLog()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ───────── HISTORY MODAL ───────── -->
+<div id="histModal" class="modal-overlay hidden">
+  <div class="modal modal-wide">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px">
+      <div>
+        <div class="modal-title" id="histTitle">Contractor</div>
+        <div class="modal-sub" id="histSub"></div>
+      </div>
+      <button class="btn-ghost" onclick="closeHist()">Close</button>
+    </div>
+    <div class="kpi-row" id="histKPIs"></div>
+    <div id="histTable"></div>
+    <div class="modal-actions" style="margin-top:16px">
+      <button class="btn-primary" onclick="logFromHist()">+ Log New Job</button>
+      <button class="btn-ghost" onclick="toggleCOIFromHist()">Toggle COI</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════
+//  CONTRACTOR DATASET
+// ══════════════════════════════════════════════
+const SUBS = [
+  {id:'jcs-cleaning',  name:'JC&S Cleaning Services LLC', phone:'2244753350', cats:['pressure','window','gutter'], ws:'nw', stars:5.0, reviews:53, priority:true,  address:'2318 E Beck Rd',          note:'5-star, 53 reviews. Covers pressure / window / gutter in one call. TOP no-website pick.'},
+  {id:'one-man-wash',  name:'One Man Wash LLC',            phone:'2244565941', cats:['pressure','window'],          ws:'mw', stars:5.0, reviews:17, priority:false, address:'333 Laurel Ave',            note:'Solo operator. Open 24h. Solo ops most eager for pipeline.'},
+  {id:'simmons-power', name:'Simmons Power & Soft Washing',phone:'8474168869', cats:['pressure'],                   ws:'mw', stars:5.0, reviews:0,  priority:false, address:'',                          note:'Soft-wash specialty. Good for roofs and siding.'},
+  {id:'gladiator-pressure',name:'Gladiator Pressure Wash', phone:'2248066516', cats:['pressure'],                   ws:'mw', stars:5.0, reviews:0,  priority:false, address:'',                          note:'Open 24h. Small independent crew.'},
+  {id:'dons-pressure', name:"Don's Pressure Wash It",      phone:'2242023197', cats:['pressure'],                   ws:'mw', stars:5.0, reviews:0,  priority:false, address:'3701 James St',             note:'Hot water capability. Good for commercial-grade grease stains.'},
+  {id:'js-precision',  name:'J&S Precision Power Wash',    phone:'2243497876', cats:['pressure'],                   ws:'mw', stars:5.0, reviews:0,  priority:false, address:'532 English Ln',            note:'Good for premium Lake Forest / Lake Bluff homes.'},
+  {id:'windy-city',    name:'Windy City Exteriors',         phone:'2246298926', cats:['pressure','gutter'],          ws:'mw', stars:5.0, reviews:17, priority:false, address:'740 Sun Lake Rd',           note:'"Max is reliable and very fair." Pressure + gutters.'},
+  {id:'z-pressure',    name:'Z Pressure Washing LLC',       phone:'8477312000', cats:['pressure'],                   ws:'mw', stars:5.0, reviews:0,  priority:false, address:'201 Thompson Ave',          note:'Daytime hours. Good for weekday jobs.'},
+  {id:'lake-county-junk', name:'Lake County Junk Removal',  phone:'8477082699', cats:['junk'],                       ws:'nw', stars:4.6, reviews:21, priority:true,  address:'Lake Forest area',          note:'Confirmed no website. Open 24h. Top junk removal pick.'},
+  {id:'mannys-junk',   name:"Manny's Junk Removal",         phone:'8475619422', cats:['junk'],                       ws:'mw', stars:5.0, reviews:105,priority:true,  address:'',                          note:'Website is a free website2.me page. "Showed up within 1 hour." 105 reviews.'},
+  {id:'butterfly-junk',name:'Butterfly Junk Removal LLC',   phone:'2248148196', cats:['junk'],                       ws:'mw', stars:5.0, reviews:69, priority:false, address:'93 E Shorewood Dr',         note:'Wix site (no booking). 69 reviews.'},
+  {id:'free-scrap',    name:'Free Scrap Metal Pick Up',      phone:'8472937516', cats:['junk'],                       ws:'mw', stars:5.0, reviews:102,priority:false, address:'1032 N Crescent Ct',        note:'102 reviews. Handles full junk + scrap. Reviews mention Mario.'},
+  {id:'rr-junk',       name:'R&R Junk Removal',              phone:'2247174674', cats:['junk'],                       ws:'mw', stars:5.0, reviews:33, priority:false, address:'2501 Deborah Ave',          note:'Open 24h. "Arrived on time, removed yard waste professionally."'},
+  {id:'junkies-junk',  name:'Junkies Junk Removal',          phone:'7793789097', cats:['junk'],                       ws:'mw', stars:5.0, reviews:30, priority:false, address:'535 S Main St',             note:'30 reviews. Good for larger estate or commercial loads.'},
+  {id:'sparkle-window',name:'Sparkle Window Cleaning Services',phone:'8472650911',cats:['window'],                   ws:'nw', stars:5.0, reviews:1,  priority:false, address:'37089 N Bonnie Brae Rd',    note:'Confirmed no website. Brand new — highest receptivity.'},
+  {id:'launder-pro',   name:'Launder Pro Clean Inc.',         phone:'8155814432', cats:['window','gutter'],           ws:'mw', stars:5.0, reviews:45, priority:false, address:'',                          note:'"Justin provided same-day service." 45 reviews. Window + gutters.'},
+  {id:'lakeview-cleaning',name:'Lakeview Cleaning Service',   phone:'8473221322', cats:['window','gutter'],           ws:'mw', stars:4.8, reviews:44, priority:false, address:'',                          note:'20+ years in business. 44 reviews. Window + gutters.'},
+  {id:'per-gutters',   name:'P.E.R Gutters LLC',              phone:'2247306514', cats:['gutter'],                    ws:'mw', stars:5.0, reviews:71, priority:true,  address:'2410 Michael Ave',          note:'ALREADY USES JOBBER. 71 reviews. Easiest integration.'},
+  {id:'goat-gutters',  name:'Goat Gutters LLC',               phone:'2244805577', cats:['gutter'],                    ws:'mw', stars:5.0, reviews:18, priority:false, address:'1702 9th St',               note:'18 reviews. Newer business, hungry for work.'},
+  {id:'lake-county-dog',name:"Lake County's Dog Waste Removal",phone:'8474459024',cats:['pet'],                       ws:'nw', stars:0,   reviews:0,  priority:true,  address:'3818 Grandville Ave',       note:'Confirmed no website. Zero reviews — brand new. Near-100% acceptance rate.'},
+  {id:'uber-scoopers', name:'Uber Scoopers Pet Waste Service', phone:'4147324536', cats:['pet'],                       ws:'mw', stars:5.0, reviews:8,  priority:false, address:'',                          note:'"Website" is literally a Google Form. Solo operator.'},
+  {id:'poos-the-boss', name:'Poos the Boss',                   phone:'8477135395', cats:['pet'],                       ws:'mw', stars:4.5, reviews:57, priority:false, address:'Algonquin (border)',        note:'Open 24h. 57 reviews. Lake/McHenry county border.'},
+  {id:'doggie-duty',   name:'Doggie Duty LLC',                  phone:'3317031301', cats:['pet'],                       ws:'mw', stars:5.0, reviews:68, priority:false, address:'Lake County IL',            note:'"Adam was quick and efficient." 68 reviews.'},
+  {id:'mueller-holiday',name:'Mueller Holiday Lights',          phone:'2245131268', cats:['holiday'],                   ws:'mw', stars:5.0, reviews:5,  priority:true,  address:'233 Grove St, Mundelein',   note:'TOP holiday pick. Mundelein IL. Certified, 4 yrs experience.'},
+  {id:'premier-holiday',name:'Premier Holiday Lighting',        phone:'2242426701', cats:['holiday'],                   ws:'mw', stars:5.0, reviews:8,  priority:false, address:'Volo IL',                   note:'Family-owned. Volo IL — deep Lake County.'},
+  {id:'gentle-giant',  name:'Gentle Giant Holiday Lighting',    phone:'2242521468', cats:['holiday'],                   ws:'mw', stars:5.0, reviews:4,  priority:false, address:'888 E Belvidere Rd, Gurnee', note:'Very new business. Gurnee IL. High receptivity.'},
+  {id:'peters-holiday',name:"Peter's Holiday Lighting",         phone:'2242594075', cats:['holiday'],                   ws:'mw', stars:4.8, reviews:18, priority:false, address:'',                          note:'"Best Christmas light team in Highland Park." 18 reviews.'},
+  {id:'northern-holiday',name:'Northern Holiday Lighting',      phone:'8472421386', cats:['holiday'],                   ws:'mw', stars:5.0, reviews:2,  priority:false, address:'1101 Midway Rd',            note:'Brand new. 2 reviews. Maximum receptivity.'},
+];
+
+// ══════════════════════════════════════════════
+//  LOCAL STORAGE
+// ══════════════════════════════════════════════
+const DB = 'partna_crm';
+function loadDB(){ try{ return JSON.parse(localStorage.getItem(DB))||{}; }catch(e){ return {}; } }
+function saveDB(db){ localStorage.setItem(DB, JSON.stringify(db)); }
+function getC(id){ const db=loadDB(); return Object.assign({status:'new',coi:false,jobs:[]}, db[id]||{}); }
+function putC(id,data){ const db=loadDB(); db[id]=data; saveDB(db); }
+
+const CYCLE  = ['new','contacted','active','inactive'];
+const LABELS = {new:'New Lead', contacted:'Contacted', active:'Active Sub', inactive:'Inactive'};
+const STAGE_NEXT = {new:'contacted', contacted:'active', active:'inactive', inactive:'new'};
+const CAT_COLORS = {
+  pressure:{bg:'rgba(59,130,246,.15)',color:'#60a5fa'},
+  junk:    {bg:'rgba(251,146,60,.15)',color:'#fb923c'},
+  window:  {bg:'rgba(99,102,241,.15)',color:'#818cf8'},
+  gutter:  {bg:'rgba(20,184,166,.15)',color:'#2dd4bf'},
+  pet:     {bg:'rgba(236,72,153,.15)',color:'#f472b6'},
+  holiday: {bg:'rgba(239,68,68,.15)', color:'#f87171'},
+};
+const CAT_LABEL = {pressure:'Pressure',junk:'Junk',window:'Window',gutter:'Gutter',pet:'Pet Waste',holiday:'Holiday'};
+const STAGE_COLORS = {
+  new:      {bg:'rgba(79,124,255,.12)', color:'var(--accent)',  border:'rgba(79,124,255,.4)'},
+  contacted:{bg:'rgba(245,158,11,.12)', color:'var(--yellow)',  border:'rgba(245,158,11,.4)'},
+  active:   {bg:'rgba(34,197,94,.12)',  color:'var(--green)',   border:'rgba(34,197,94,.4)'},
+  inactive: {bg:'rgba(107,114,128,.12)',color:'var(--muted)',   border:'rgba(107,114,128,.3)'},
+};
+
+// ══════════════════════════════════════════════
+//  FILTER STATE
+// ══════════════════════════════════════════════
+var activeFilter = 'all';
+var searchVal = '';
+var currentView = 'pipeline';
+var sortKey = 'priority';
+
+function filteredSubs(){
+  var db = loadDB();
+  return SUBS.filter(function(s){
+    if(activeFilter==='nw') return s.ws==='nw';
+    if(activeFilter==='mw') return s.ws==='mw';
+    if(activeFilter && activeFilter.startsWith('cat-')){
+      var cat=activeFilter.replace('cat-','');
+      return s.cats.indexOf(cat)!==-1;
+    }
+    if(searchVal){
+      var q=searchVal.toLowerCase();
+      var inName=s.name.toLowerCase().indexOf(q)!==-1;
+      var inPhone=s.phone.indexOf(q)!==-1;
+      var inCat=s.cats.join(' ').indexOf(q)!==-1;
+      return inName||inPhone||inCat;
+    }
+    return true;
+  }).sort(function(a,b){
+    if(sortKey==='name') return a.name.localeCompare(b.name);
+    if(sortKey==='stars') return (b.stars||0)-(a.stars||0);
+    if(sortKey==='reviews') return (b.reviews||0)-(a.reviews||0);
+    if(sortKey==='jobs'){
+      var da=getC(a.id), db2=getC(b.id);
+      return (db2.jobs||[]).length-(da.jobs||[]).length;
+    }
+    if(sortKey==='revenue'){
+      var da=getC(a.id), db2=getC(b.id);
+      var ra=(da.jobs||[]).reduce(function(s,j){return s+(j.price||0);},0);
+      var rb=(db2.jobs||[]).reduce(function(s,j){return s+(j.price||0);},0);
+      return rb-ra;
+    }
+    // priority: no-website first, then priority flag, then reviews
+    if(a.ws!==b.ws) return a.ws==='nw'?-1:1;
+    if(a.priority!==b.priority) return a.priority?-1:1;
+    return (b.reviews||0)-(a.reviews||0);
+  });
+}
+
+function fmtPhone(p){ return p.length===10?'('+p.slice(0,3)+') '+p.slice(3,6)+'-'+p.slice(6):p; }
+function today(){ return new Date().toISOString().slice(0,10); }
+
+// ══════════════════════════════════════════════
+//  PIPELINE VIEW
+// ══════════════════════════════════════════════
+function renderPipeline(){
+  var db = loadDB();
+  var board = document.getElementById('pipelineBoard');
+  board.textContent='';
+  var subs = filteredSubs();
+
+  CYCLE.forEach(function(stage){
+    var stageSubs = subs.filter(function(s){ return (db[s.id]&&db[s.id].status||'new')===stage; });
+
+    // Column value
+    var stageRev = 0;
+    stageSubs.forEach(function(s){
+      var data=getC(s.id);
+      (data.jobs||[]).forEach(function(j){ stageRev+=(j.price||0); });
+    });
+
+    var col = document.createElement('div');
+    col.className = 'col';
+
+    // Column header
+    var hdr = document.createElement('div');
+    hdr.className = 'col-header';
+
+    var titleRow = document.createElement('div');
+    titleRow.className = 'col-title';
+
+    var colName = document.createElement('div');
+    colName.className = 'col-name';
+    colName.style.color = STAGE_COLORS[stage].color;
+    colName.textContent = LABELS[stage];
+
+    var colCount = document.createElement('div');
+    colCount.className = 'col-count';
+    colCount.style.background = STAGE_COLORS[stage].bg;
+    colCount.style.color = STAGE_COLORS[stage].color;
+    colCount.textContent = stageSubs.length;
+
+    titleRow.appendChild(colName);
+    titleRow.appendChild(colCount);
+
+    var colMeta = document.createElement('div');
+    colMeta.className = 'col-meta';
+    colMeta.textContent = stageRev>0 ? '$'+stageRev+' revenue logged' : stage==='active'?'No jobs yet — dispatch first':'—';
+
+    hdr.appendChild(titleRow);
+    hdr.appendChild(colMeta);
+    col.appendChild(hdr);
+
+    var body = document.createElement('div');
+    body.className = 'col-body';
+
+    stageSubs.forEach(function(sub){
+      var data = getC(sub.id);
+      var jobs = data.jobs||[];
+      var rev = jobs.reduce(function(s,j){return s+(j.price||0);},0);
+      var lastJob = jobs.length>0?jobs[jobs.length-1].date:null;
+
+      var card = document.createElement('div');
+      card.className = 'pcard '+sub.ws;
+      if(sub.priority){ var star=document.createElement('span'); star.style.cssText='position:absolute;top:8px;right:8px;color:#fbbf24;font-size:12px'; star.textContent='★'; card.style.position='relative'; card.appendChild(star); }
+
+      // Name
+      var nm = document.createElement('div');
+      nm.className = 'pcard-name';
+      nm.textContent = sub.name;
+      nm.addEventListener('click', function(){ openHistory(sub.id,sub.name); });
+      card.appendChild(nm);
+
+      // Tags
+      var tags = document.createElement('div');
+      tags.className = 'pcard-tags';
+      sub.cats.forEach(function(c){
+        var t=document.createElement('span');
+        t.className='ptag';
+        t.style.background=CAT_COLORS[c].bg;
+        t.style.color=CAT_COLORS[c].color;
+        t.textContent=CAT_LABEL[c];
+        tags.appendChild(t);
+      });
+      // WS badge
+      var wsbadge=document.createElement('span');
+      wsbadge.className='ws-badge '+sub.ws;
+      wsbadge.textContent=sub.ws==='nw'?'✅ No Website':'⚠️ Minimal';
+      tags.appendChild(wsbadge);
+      card.appendChild(tags);
+
+      // Meta: phone + rating
+      var meta = document.createElement('div');
+      meta.className = 'pcard-meta';
+      var ph = document.createElement('span');
+      ph.style.color='var(--green)';ph.style.cursor='pointer';
+      ph.textContent='📞 '+fmtPhone(sub.phone);
+      ph.addEventListener('click',function(){ window.location.href='tel:'+sub.phone; });
+      var rating = document.createElement('span');
+      rating.textContent = sub.reviews>0 ? '⭐ '+sub.stars+' ('+sub.reviews+')' : 'New';
+      meta.appendChild(ph);
+      meta.appendChild(rating);
+      card.appendChild(meta);
+
+      // KPI row
+      var kpiRow = document.createElement('div');
+      kpiRow.className = 'pcard-kpi';
+      [[jobs.length+' jobs','Jobs'],[rev>0?'$'+rev:'$0','Revenue'],[data.coi?'✅ COI':'❌ COI','']].forEach(function(kv){
+        var sp=document.createElement('span');
+        var kv2=document.createElement('span');kv2.className='kv';kv2.textContent=kv[0];
+        sp.textContent=kv[1]+' ';
+        sp.appendChild(kv2);
+        kpiRow.appendChild(sp);
+      });
+      card.appendChild(kpiRow);
+
+      // Actions
+      var acts = document.createElement('div');
+      acts.className = 'pcard-actions';
+
+      var nextStage = STAGE_NEXT[stage];
+      var advBtn = document.createElement('button');
+      advBtn.className = 'pa-btn advance';
+      advBtn.textContent = '→ '+LABELS[nextStage];
+      (function(sid,sname,ns){ advBtn.addEventListener('click',function(){ advanceStage(sid,ns); render(); }); })(sub.id,sub.name,nextStage);
+      acts.appendChild(advBtn);
+
+      var logBtn = document.createElement('button');
+      logBtn.className = 'pa-btn log';
+      logBtn.textContent = '+ Job';
+      (function(sid,sname){ logBtn.addEventListener('click',function(){ openLog(sid,sname); }); })(sub.id,sub.name);
+      acts.appendChild(logBtn);
+
+      var histBtn = document.createElement('button');
+      histBtn.className = 'pa-btn hist';
+      histBtn.textContent = '📋';
+      (function(sid,sname){ histBtn.addEventListener('click',function(){ openHistory(sid,sname); }); })(sub.id,sub.name);
+      acts.appendChild(histBtn);
+
+      card.appendChild(acts);
+      body.appendChild(card);
+    });
+
+    if(stageSubs.length===0){
+      var empty = document.createElement('div');
+      empty.style.cssText='padding:24px;text-align:center;color:var(--muted);font-size:12px';
+      empty.textContent = stage==='active'?'No active subs yet. Move contractors here after they accept.':stage==='contacted'?'No contacted subs. Click → to advance a lead.':'Empty';
+      body.appendChild(empty);
+    }
+
+    col.appendChild(body);
+    board.appendChild(col);
+  });
+}
+
+// ══════════════════════════════════════════════
+//  CONTACTS VIEW (Card Grid)
+// ══════════════════════════════════════════════
+function renderContacts(){
+  var subs = filteredSubs();
+  var db = loadDB();
+  var grid = document.getElementById('contactsGrid');
+  grid.textContent='';
+  grid.style.cssText='display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px';
+
+  subs.forEach(function(sub){
+    var data = getC(sub.id);
+    var jobs = data.jobs||[];
+    var rev = jobs.reduce(function(s,j){return s+(j.price||0);},0);
+    var st = data.status||'new';
+
+    var card = document.createElement('div');
+    card.style.cssText='background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;position:relative;transition:all .15s;border-left:3px solid '+(sub.ws==='nw'?'var(--green)':'var(--yellow)');
+    card.addEventListener('mouseenter',function(){this.style.background='#252840';this.style.borderColor='#3a3f5c';this.style.transform='translateY(-1px)';});
+    card.addEventListener('mouseleave',function(){this.style.background='var(--surface)';this.style.borderColor='var(--border)';this.style.transform='';});
+
+    if(sub.priority){
+      var star=document.createElement('div');
+      star.style.cssText='position:absolute;top:10px;right:10px;color:#fbbf24;font-size:14px';
+      star.textContent='★';card.appendChild(star);
+    }
+
+    // Top row: name + badge
+    var top=document.createElement('div');
+    top.style.cssText='display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px';
+    var nm=document.createElement('div');
+    nm.style.cssText='font-size:15px;font-weight:600;line-height:1.3;flex:1;margin-right:8px;cursor:pointer';
+    nm.textContent=sub.name;
+    nm.addEventListener('click',function(){openHistory(sub.id,sub.name);});
+    nm.addEventListener('mouseenter',function(){this.style.color='var(--accent)';});
+    nm.addEventListener('mouseleave',function(){this.style.color='';});
+    var badge=document.createElement('button');
+    badge.className='sbadge '+st;
+    badge.textContent=LABELS[st];
+    badge.addEventListener('click',function(){ cycleStatusById(sub.id,badge); });
+    top.appendChild(nm);top.appendChild(badge);card.appendChild(top);
+
+    // WS badge
+    var ws=document.createElement('div');
+    ws.className='ws-badge '+(sub.ws==='nw'?'nw':'mw');
+    ws.style.marginBottom='8px';
+    ws.textContent=sub.ws==='nw'?'✅ No Website':'⚠️ Minimal Website';
+    card.appendChild(ws);
+
+    // Category tags
+    var tags=document.createElement('div');
+    tags.style.cssText='display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px';
+    sub.cats.forEach(function(c){
+      var t=document.createElement('span');
+      t.style.cssText='font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;background:'+CAT_COLORS[c].bg+';color:'+CAT_COLORS[c].color;
+      t.textContent=CAT_LABEL[c];tags.appendChild(t);
+    });
+    card.appendChild(tags);
+
+    // Meta: phone + stars
+    var meta=document.createElement('div');
+    meta.style.cssText='display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px';
+    var ph=document.createElement('a');
+    ph.href='tel:'+sub.phone;
+    ph.style.cssText='font-size:11px;padding:3px 8px;border-radius:4px;background:rgba(34,197,94,.08);color:var(--green);display:flex;align-items:center;gap:4px;text-decoration:none';
+    ph.textContent='📞 '+fmtPhone(sub.phone);
+    meta.appendChild(ph);
+    if(sub.reviews>0){
+      var st2=document.createElement('span');
+      st2.style.cssText='font-size:11px;padding:3px 8px;border-radius:4px;background:rgba(251,191,36,.08);color:#fbbf24';
+      st2.textContent='⭐ '+sub.stars+' ('+sub.reviews+')';
+      meta.appendChild(st2);
+    }
+    if(sub.address){
+      var addr=document.createElement('span');
+      addr.style.cssText='font-size:11px;padding:3px 8px;border-radius:4px;background:var(--surface2);color:var(--muted)';
+      addr.textContent='📍 '+sub.address;
+      meta.appendChild(addr);
+    }
+    card.appendChild(meta);
+
+    // KPI row
+    var kpiRow=document.createElement('div');
+    kpiRow.style.cssText='display:flex;flex-wrap:wrap;gap:5px;padding:8px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:8px';
+    var kpis=[
+      [jobs.length+(jobs.length===1?' job':' jobs'),'jobs','rgba(59,130,246,.08)','var(--blue)'],
+      [jobs.length>0?'Last: '+jobs[jobs.length-1].date:'No jobs','last','var(--surface2)','var(--muted)'],
+      [data.coi?'COI: ✅':'COI: ❌','coi','var(--surface2)','var(--muted)']
+    ];
+    kpis.forEach(function(kp){
+      var pill=document.createElement('span');
+      pill.style.cssText='font-size:11px;padding:3px 8px;border-radius:4px;background:'+kp[2]+';color:'+kp[3];
+      pill.textContent=kp[0];
+      if(kp[1]==='coi'){ pill.style.cursor='pointer'; (function(sid){ pill.addEventListener('click',function(){toggleCOI(sid);render();}); })(sub.id); }
+      kpiRow.appendChild(pill);
+    });
+    card.appendChild(kpiRow);
+
+    // Note
+    if(sub.note){
+      var note=document.createElement('div');
+      note.style.cssText='font-size:12px;color:var(--muted);line-height:1.5;padding-top:4px';
+      note.textContent=sub.note;
+      card.appendChild(note);
+    }
+
+    // Actions
+    var acts=document.createElement('div');
+    acts.style.cssText='display:flex;gap:6px;margin-top:10px;flex-wrap:wrap';
+    var btnStyle='font-size:11px;padding:5px 10px;border-radius:6px;border:1px solid;background:transparent;cursor:pointer;transition:all .15s;text-decoration:none;display:inline-flex;align-items:center;gap:4px';
+    var callA=document.createElement('a');
+    callA.href='tel:'+sub.phone;
+    callA.style.cssText=btnStyle+';border-color:rgba(34,197,94,.4);color:var(--green)';
+    callA.textContent='📞 Call';acts.appendChild(callA);
+    var mapsA=document.createElement('a');
+    mapsA.href='https://www.google.com/maps/search/'+encodeURIComponent(sub.name+' Lake County IL');
+    mapsA.target='_blank';
+    mapsA.style.cssText=btnStyle+';border-color:rgba(79,124,255,.4);color:var(--accent)';
+    mapsA.textContent='🗺 Maps';acts.appendChild(mapsA);
+    var logBtn2=document.createElement('button');
+    logBtn2.style.cssText=btnStyle+';border-color:rgba(168,85,247,.4);color:var(--purple)';
+    logBtn2.textContent='+ Log Job';
+    (function(sid,sname){logBtn2.addEventListener('click',function(){openLog(sid,sname);});})(sub.id,sub.name);
+    acts.appendChild(logBtn2);
+    var histBtn2=document.createElement('button');
+    histBtn2.style.cssText=btnStyle+';border-color:rgba(245,158,11,.4);color:var(--yellow)';
+    histBtn2.textContent='📋 History';
+    (function(sid,sname){histBtn2.addEventListener('click',function(){openHistory(sid,sname);});})(sub.id,sub.name);
+    acts.appendChild(histBtn2);
+    card.appendChild(acts);
+
+    grid.appendChild(card);
+  });
+
+  if(subs.length===0){
+    var empty=document.createElement('div');
+    empty.style.cssText='grid-column:1/-1;padding:60px;text-align:center;color:var(--muted);font-size:14px';
+    empty.textContent='No contractors match your filter.';
+    grid.appendChild(empty);
+  }
+}
+
+// ══════════════════════════════════════════════
+//  ANALYTICS VIEW
+// ══════════════════════════════════════════════
+function renderAnalytics(){
+  var db=loadDB();
+  var pane=document.getElementById('analyticsPane');
+  pane.textContent='';
+
+  // Aggregate data
+  var totalJobs=0,totalRev=0,totalPay=0;
+  var byStage={new:0,contacted:0,active:0,inactive:0};
+  var byCat={pressure:{rev:0,jobs:0},junk:{rev:0,jobs:0},window:{rev:0,jobs:0},gutter:{rev:0,jobs:0},pet:{rev:0,jobs:0},holiday:{rev:0,jobs:0}};
+  var topSubs=[];
+  var wonCount=0;
+
+  SUBS.forEach(function(sub){
+    var data=getC(sub.id);
+    var stage=data.status||'new';
+    byStage[stage]=(byStage[stage]||0)+1;
+    var jobs=data.jobs||[];
+    var rev=jobs.reduce(function(s,j){return s+(j.price||0);},0);
+    var pay=jobs.reduce(function(s,j){return s+(j.payout||0);},0);
+    totalJobs+=jobs.length;totalRev+=rev;totalPay+=pay;
+    if(jobs.length>0) wonCount++;
+    topSubs.push({name:sub.name,jobs:jobs.length,rev:rev,pay:pay,id:sub.id});
+    jobs.forEach(function(j){
+      var svc=(j.service||'').toLowerCase().replace(' ','').replace('washing','').replace('removal','').replace('cleaning','').replace('waste','').replace('pet','pet').replace('holiday','holiday');
+      var catKey=j.service==='Pressure Washing'?'pressure':j.service==='Junk Removal'?'junk':j.service==='Window Cleaning'?'window':j.service==='Gutter Cleaning'?'gutter':j.service==='Pet Waste Removal'?'pet':'holiday';
+      if(byCat[catKey]){byCat[catKey].rev+=(j.price||0);byCat[catKey].jobs++;}
+    });
+  });
+
+  topSubs.sort(function(a,b){return b.jobs-a.jobs||b.rev-a.rev;});
+  var contacted=byStage.contacted+byStage.active+byStage.inactive;
+  var winRate=contacted>0?Math.round(byStage.active/contacted*100):0;
+  var avgJob=totalJobs>0?Math.round(totalRev/totalJobs):0;
+  var avgMargin=totalRev>0?Math.round((totalRev-totalPay)/totalRev*100):50;
+
+  // ── Row 1: KPI tiles ──
+  var row1=document.createElement('div');row1.className='an-row cols-4';
+  [
+    ['Open Pipeline',byStage.new+' leads','var(--accent)'],
+    ['Active Subs',byStage.active,'var(--green)'],
+    ['Closed / Won',wonCount+' subs','var(--purple)'],
+    ['Win Rate',winRate+'%','var(--teal)'],
+  ].forEach(function(kp){
+    var c=document.createElement('div');c.className='an-card';
+    var t=document.createElement('div');t.className='an-title';t.textContent=kp[0];
+    var v=document.createElement('div');v.className='an-kpi';v.style.color=kp[2];v.textContent=kp[1];
+    c.appendChild(t);c.appendChild(v);row1.appendChild(c);
+  });
+  pane.appendChild(row1);
+
+  // ── Row 2: Revenue KPIs ──
+  var row2=document.createElement('div');row2.className='an-row cols-4';
+  [
+    ['Jobs Done',totalJobs,'var(--purple)','all subcontractors'],
+    ['Partna Revenue','$'+totalRev,'var(--green)','gross collected'],
+    ['Paid to Subs','$'+totalPay,'var(--yellow)','Zelle out'],
+    ['Avg Job Value','$'+avgJob,'var(--text)','per dispatch'],
+  ].forEach(function(kp){
+    var c=document.createElement('div');c.className='an-card';
+    var t=document.createElement('div');t.className='an-title';t.textContent=kp[0];
+    var v=document.createElement('div');v.className='an-kpi';v.style.color=kp[2];v.textContent=kp[1];
+    var s=document.createElement('div');s.className='an-kpi-sub';s.textContent=kp[3];
+    c.appendChild(t);c.appendChild(v);c.appendChild(s);row2.appendChild(c);
+  });
+  pane.appendChild(row2);
+
+  // ── Row 3: Funnel + Category Revenue ──
+  var row3=document.createElement('div');row3.className='an-row cols-2';
+
+  // Funnel
+  var fc=document.createElement('div');fc.className='an-card';
+  var ft=document.createElement('div');ft.className='an-title';ft.textContent='Recruitment Funnel';
+  fc.appendChild(ft);
+  var funnel=document.createElement('div');funnel.className='funnel';
+  var total=SUBS.length;
+  [[byStage.new,'New Leads','var(--accent)'],[byStage.contacted,'Contacted','var(--yellow)'],[byStage.active,'Active Subs','var(--green)'],[wonCount,'Closed / Won','var(--purple)']].forEach(function(f){
+    var row=document.createElement('div');row.className='funnel-row';
+    var lbl=document.createElement('div');lbl.className='funnel-label';lbl.textContent=f[1];
+    var bwrap=document.createElement('div');bwrap.className='funnel-bar-wrap';
+    var bar=document.createElement('div');bar.className='funnel-bar';
+    bar.style.background=f[2];
+    bar.style.width=Math.max(2,Math.round(f[0]/total*100))+'%';
+    var bval=document.createElement('div');bval.className='funnel-bar-val';bval.textContent=f[0];
+    bar.appendChild(bval);bwrap.appendChild(bar);
+    var cnt=document.createElement('div');cnt.className='funnel-count';cnt.textContent=f[0];
+    row.appendChild(lbl);row.appendChild(bwrap);row.appendChild(cnt);
+    funnel.appendChild(row);
+  });
+  fc.appendChild(funnel);row3.appendChild(fc);
+
+  // Category revenue
+  var cc=document.createElement('div');cc.className='an-card';
+  var ct=document.createElement('div');ct.className='an-title';ct.textContent='Revenue by Service Category';
+  cc.appendChild(ct);
+  var maxRev=Math.max(1,Math.max.apply(null,Object.values(byCat).map(function(v){return v.rev;})));
+  var bchart=document.createElement('div');bchart.className='bar-chart';
+  [['pressure','Pressure Wash','#60a5fa'],['junk','Junk Removal','#fb923c'],['window','Window Clean','#818cf8'],['gutter','Gutter Clean','#2dd4bf'],['pet','Pet Waste','#f472b6'],['holiday','Holiday Lights','#f87171']].forEach(function(c){
+    var d=byCat[c[0]];
+    var brow=document.createElement('div');brow.className='bc-row';
+    var lbl=document.createElement('div');lbl.className='bc-label';lbl.textContent=c[1];
+    var bwrap=document.createElement('div');bwrap.className='bc-bar-wrap';
+    var bar=document.createElement('div');bar.className='bc-bar';
+    bar.style.background=c[2];
+    bar.style.width=Math.max(2,Math.round(d.rev/maxRev*100))+'%';
+    var bval=document.createElement('div');bval.className='bc-val';
+    bval.textContent=d.jobs>0?d.jobs+' job'+(d.jobs>1?'s':''):'';
+    bar.appendChild(bval);bwrap.appendChild(bar);
+    var amt=document.createElement('div');amt.className='bc-amt';amt.textContent=d.rev>0?'$'+d.rev:'—';
+    brow.appendChild(lbl);brow.appendChild(bwrap);brow.appendChild(amt);
+    bchart.appendChild(brow);
+  });
+  cc.appendChild(bchart);row3.appendChild(cc);
+  pane.appendChild(row3);
+
+  // ── Row 4: Top subs table ──
+  var row4=document.createElement('div');row4.className='an-row cols-3';
+
+  // Top subs
+  var tc=document.createElement('div');tc.className='an-card';tc.style.gridColumn='span 2';
+  var tt=document.createElement('div');tt.className='an-title';tt.textContent='Top Subcontractors by Performance';
+  tc.appendChild(tt);
+  var table=document.createElement('table');table.className='top-table';
+  var thead=document.createElement('thead');
+  var hr=document.createElement('tr');
+  ['Rank','Name','Jobs','Revenue','Payout','Margin','COI'].forEach(function(h){var th=document.createElement('th');th.textContent=h;hr.appendChild(th);});
+  thead.appendChild(hr);table.appendChild(thead);
+  var tbody=document.createElement('tbody');
+  topSubs.slice(0,8).forEach(function(s,i){
+    var tr=document.createElement('tr');
+    var tdRank=document.createElement('td');
+    var rankEl=document.createElement('span');rankEl.className='rank-num'+(i===0?' rank-1':i===1?' rank-2':i===2?' rank-3':'');
+    rankEl.textContent=i+1;tdRank.appendChild(rankEl);tr.appendChild(tdRank);
+    var tdName=document.createElement('td');tdName.style.fontWeight='600';tdName.textContent=s.name;
+    tdName.style.cursor='pointer';
+    (function(sid,sname){tdName.addEventListener('click',function(){openHistory(sid,sname);});})(s.id,s.name);
+    tr.appendChild(tdName);
+    var margin2=s.rev>0?Math.round((s.rev-s.pay)/s.rev*100):50;
+    [s.jobs,s.rev>0?'$'+s.rev:'—',s.pay>0?'$'+s.pay:'—',margin2+'%'].forEach(function(v){var td=document.createElement('td');td.textContent=v;tr.appendChild(td);});
+    var tdCOI=document.createElement('td');
+    var coiData=getC(s.id);
+    tdCOI.textContent=coiData.coi?'✅':'❌';tr.appendChild(tdCOI);
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);tc.appendChild(table);row4.appendChild(tc);
+
+  // COI status
+  var coiCard=document.createElement('div');coiCard.className='an-card';
+  var coit=document.createElement('div');coit.className='an-title';coit.textContent='COI Status';
+  coiCard.appendChild(coit);
+  var coiHave=SUBS.filter(function(s){return getC(s.id).coi;}).length;
+  var coiPct=Math.round(coiHave/SUBS.length*100);
+  var bigVal=document.createElement('div');bigVal.className='an-kpi';bigVal.style.color='var(--green)';bigVal.textContent=coiHave+'/'+SUBS.length;
+  var bigSub=document.createElement('div');bigSub.className='an-kpi-sub';bigSub.textContent='COIs on file ('+coiPct+'%)';
+  coiCard.appendChild(bigVal);coiCard.appendChild(bigSub);
+  var coiNote=document.createElement('p');coiNote.style.cssText='font-size:12px;color:var(--muted);margin-top:16px;line-height:1.6';
+  coiNote.textContent='Never dispatch a sub without a COI naming Partna Company LLC as additional insured. Click COI pill on any card to toggle.';
+  coiCard.appendChild(coiNote);
+  row4.appendChild(coiCard);
+  pane.appendChild(row4);
+}
+
+// ══════════════════════════════════════════════
+//  ACTIVITY FEED
+// ══════════════════════════════════════════════
+function renderActivity(){
+  var db=loadDB();
+  var allJobs=[];
+  SUBS.forEach(function(sub){
+    var data=getC(sub.id);
+    (data.jobs||[]).forEach(function(j){
+      allJobs.push(Object.assign({},j,{subId:sub.id,subName:sub.name}));
+    });
+  });
+  allJobs.sort(function(a,b){return b.id-a.id;});
+  document.getElementById('actCount').textContent=allJobs.length+' jobs total';
+
+  var pane=document.getElementById('activityPane');
+  pane.textContent='';
+
+  if(allJobs.length===0){
+    var empty=document.createElement('div');
+    empty.className='act-empty';
+    empty.textContent='No jobs logged yet. Click "+ Log Job" or use the + button on any contractor card to record the first dispatch.';
+    pane.appendChild(empty);
+    return;
+  }
+
+  var table=document.createElement('table');table.className='act-table';
+  var thead=document.createElement('thead');
+  var hr=document.createElement('tr');
+  ['Date','Subcontractor','Service','Job Value','Payout','Margin','Notes',''].forEach(function(h){var th=document.createElement('th');th.textContent=h;hr.appendChild(th);});
+  thead.appendChild(hr);table.appendChild(thead);
+  var tbody=document.createElement('tbody');
+  allJobs.forEach(function(j){
+    var tr=document.createElement('tr');
+    var margin=j.price>0?Math.round((j.price-j.payout)/j.price*100):50;
+    [j.date, j.subName, j.service||'—', '$'+(j.price||0), '$'+(j.payout||0), margin+'%', j.notes||'—'].forEach(function(v,i){
+      var td=document.createElement('td');
+      if(i===1){td.style.fontWeight='600';td.style.cursor='pointer';
+        (function(sid,sname){td.addEventListener('click',function(){openHistory(sid,sname);});})(j.subId,j.subName);}
+      if(i===2){td.style.color='var(--text2)';}
+      if(i===3){td.style.color='var(--green)';}
+      if(i===4){td.style.color='var(--yellow)';}
+      if(i===5){td.style.color=margin>=45?'var(--green)':'var(--red)';}
+      td.textContent=v;tr.appendChild(td);
+    });
+    var tdDel=document.createElement('td');
+    var del=document.createElement('button');del.className='btn-delete';del.textContent='Delete';
+    (function(sid,jid){del.addEventListener('click',function(){deleteJob(sid,jid);renderActivity();updateSummary();});})(j.subId,j.id);
+    tdDel.appendChild(del);tr.appendChild(tdDel);
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);pane.appendChild(table);
+}
+
+// ══════════════════════════════════════════════
+//  SUMMARY BAR
+// ══════════════════════════════════════════════
+function updateSummary(){
+  var db=loadDB();
+  var byStage={new:0,contacted:0,active:0,inactive:0};
+  var totalJobs=0,totalRev=0,totalPay=0,wonCount=0,coiCount=0;
+  SUBS.forEach(function(sub){
+    var data=getC(sub.id);
+    var stage=data.status||'new';
+    byStage[stage]=(byStage[stage]||0)+1;
+    var jobs=data.jobs||[];
+    jobs.forEach(function(j){totalRev+=(j.price||0);totalPay+=(j.payout||0);});
+    totalJobs+=jobs.length;
+    if(jobs.length>0) wonCount++;
+    if(data.coi) coiCount++;
+  });
+  var contacted=byStage.contacted+byStage.active+byStage.inactive;
+  var winRate=contacted>0?Math.round(byStage.active/contacted*100):0;
+  var avgMargin=totalRev>0?Math.round((totalRev-totalPay)/totalRev*100):50;
+  document.getElementById('sNL').textContent=byStage.new;
+  document.getElementById('sCT').textContent=byStage.contacted;
+  document.getElementById('sAS').textContent=byStage.active;
+  document.getElementById('sWON').textContent=wonCount;
+  document.getElementById('sWIN').textContent=winRate;
+  document.getElementById('sJobs').textContent=totalJobs;
+  document.getElementById('sRev').textContent='$'+totalRev;
+  document.getElementById('sPay').textContent='$'+totalPay;
+  document.getElementById('sMargin').textContent=avgMargin;
+  document.getElementById('globalCOI').textContent=coiCount+' COI'+(coiCount===1?'':'s')+' on file';
+}
+
+// ══════════════════════════════════════════════
+//  STATUS / COI
+// ══════════════════════════════════════════════
+function advanceStage(id,nextStage){
+  var data=getC(id);
+  data.status=nextStage;
+  putC(id,data);
+  updateSummary();
+}
+
+function cycleStatusById(id,badge){
+  var data=getC(id);
+  var cur=data.status||'new';
+  var nxt=CYCLE[(CYCLE.indexOf(cur)+1)%CYCLE.length];
+  data.status=nxt;
+  putC(id,data);
+  badge.className='sbadge '+nxt;
+  badge.textContent=LABELS[nxt];
+  updateSummary();
+}
+
+function toggleCOI(id){
+  var data=getC(id);
+  data.coi=!data.coi;
+  putC(id,data);
+  updateSummary();
+}
+
+// ══════════════════════════════════════════════
+//  LOG JOB MODAL
+// ══════════════════════════════════════════════
+var _logId=null,_logName='';
+
+function openLog(id,name){
+  // Populate dropdown
+  var sel=document.getElementById('logSubSel');
+  sel.textContent='';
+  var grp=document.getElementById('logSubGroup');
+  if(id){
+    grp.style.display='none';
+    _logId=id;_logName=name;
+    document.getElementById('logModalSub').textContent=name;
+  } else {
+    grp.style.display='block';
+    document.getElementById('logModalSub').textContent='Select contractor below';
+    SUBS.forEach(function(s){
+      var opt=document.createElement('option');
+      opt.value=s.id;
+      opt.textContent=s.name;
+      sel.appendChild(opt);
+    });
+    _logId=null;_logName='';
+  }
+  document.getElementById('jobDate').value=today();
+  document.getElementById('jobPrice').value='';
+  document.getElementById('jobPayout').value='';
+  document.getElementById('jobNotes').value='';
+  document.getElementById('logModal').classList.remove('hidden');
+}
+
+document.getElementById('jobPrice').addEventListener('input',function(){
+  var p=parseFloat(this.value)||0;
+  document.getElementById('jobPayout').value=Math.round(p*0.5);
+});
+
+function saveJob(){
+  var id=_logId||document.getElementById('logSubSel').value;
+  var name=_logName||SUBS.find(function(s){return s.id===id;}).name;
+  if(!id){alert('Select a contractor.');return;}
+  var date=document.getElementById('jobDate').value;
+  var price=parseFloat(document.getElementById('jobPrice').value)||0;
+  var payout=parseFloat(document.getElementById('jobPayout').value)||0;
+  if(!date||price<=0){alert('Enter a date and job value.');return;}
+  var service=document.getElementById('jobService').value;
+  var notes=document.getElementById('jobNotes').value.trim();
+  var data=getC(id);
+  data.jobs=data.jobs||[];
+  data.jobs.push({id:Date.now(),date:date,service:service,price:price,payout:payout,notes:notes});
+  // Auto-advance to active if still at new/contacted
+  if(!data.status||data.status==='new'||data.status==='contacted') data.status='active';
+  putC(id,data);
+  closeLog();
+  updateSummary();
+  render();
+}
+function closeLog(){ document.getElementById('logModal').classList.add('hidden'); }
+
+// ══════════════════════════════════════════════
+//  HISTORY MODAL
+// ══════════════════════════════════════════════
+var _histId=null,_histName='';
+
+function openHistory(id,name){
+  _histId=id;_histName=name;
+  var sub=SUBS.find(function(s){return s.id===id;});
+  document.getElementById('histTitle').textContent=name;
+  document.getElementById('histSub').textContent=sub?fmtPhone(sub.phone)+' · '+sub.cats.map(function(c){return CAT_LABEL[c];}).join(', '):'';
+  renderHistKPIs(id);
+  renderHistTable(id);
+  document.getElementById('histModal').classList.remove('hidden');
+}
+
+function renderHistKPIs(id){
+  var data=getC(id);
+  var jobs=data.jobs||[];
+  var rev=jobs.reduce(function(s,j){return s+(j.price||0);},0);
+  var pay=jobs.reduce(function(s,j){return s+(j.payout||0);},0);
+  var avg=jobs.length>0?Math.round(rev/jobs.length):0;
+  var margin2=rev>0?Math.round((rev-pay)/rev*100):50;
+  var last=jobs.length>0?jobs[jobs.length-1].date:'—';
+  var kpis=[['Jobs Done',jobs.length,'var(--purple)'],['Revenue','$'+rev,'var(--green)'],['Paid Out','$'+pay,'var(--yellow)'],['Avg Job','$'+avg,null],['Margin',margin2+'%',margin2>=45?'var(--green)':'var(--red)'],['Last Job',last,null],['COI',data.coi?'✅ On file':'❌ Missing',data.coi?'var(--green)':'var(--red)'],['Stage',LABELS[data.status||'new'],null]];
+  var row=document.getElementById('histKPIs');row.textContent='';
+  kpis.forEach(function(kp){
+    var tile=document.createElement('div');tile.className='kpi-tile';
+    var lbl=document.createElement('div');lbl.className='kpi-tile-label';lbl.textContent=kp[0];
+    var val=document.createElement('div');val.className='kpi-tile-val';val.textContent=kp[1];
+    if(kp[2]) val.style.color=kp[2];
+    tile.appendChild(lbl);tile.appendChild(val);row.appendChild(tile);
+  });
+}
+
+function renderHistTable(id){
+  var data=getC(id);
+  var jobs=(data.jobs||[]).slice().reverse();
+  var wrap=document.getElementById('histTable');wrap.textContent='';
+  if(jobs.length===0){
+    var msg=document.createElement('p');msg.className='history-empty';msg.textContent='No jobs logged yet. Click "+ Log New Job" to record the first dispatch.';
+    wrap.appendChild(msg);return;
+  }
+  var outer=document.createElement('div');outer.className='history-table-wrap';
+  var table=document.createElement('table');table.className='history-table';
+  var thead=document.createElement('thead');
+  var hr2=document.createElement('tr');
+  ['Date','Service','Job Value','Payout','Margin','Notes',''].forEach(function(h){var th=document.createElement('th');th.textContent=h;hr2.appendChild(th);});
+  thead.appendChild(hr2);table.appendChild(thead);
+  var tbody=document.createElement('tbody');
+  jobs.forEach(function(j){
+    var tr=document.createElement('tr');
+    var m2=j.price>0?Math.round((j.price-j.payout)/j.price*100):50;
+    [j.date,j.service,'$'+(j.price||0),'$'+(j.payout||0),m2+'%',j.notes||'—'].forEach(function(v,i){
+      var td=document.createElement('td');td.textContent=v;
+      if(i===2)td.style.color='var(--green)';
+      if(i===3)td.style.color='var(--yellow)';
+      if(i===4)td.style.color=m2>=45?'var(--green)':'var(--red)';
+      tr.appendChild(td);
+    });
+    var tdDel=document.createElement('td');
+    var del=document.createElement('button');del.className='btn-delete';del.textContent='Delete';
+    (function(jid){del.addEventListener('click',function(){deleteJob(id,jid);renderHistKPIs(id);renderHistTable(id);updateSummary();render();});})(j.id);
+    tdDel.appendChild(del);tr.appendChild(tdDel);tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);outer.appendChild(table);wrap.appendChild(outer);
+}
+
+function deleteJob(contractorId,jobId){
+  var data=getC(contractorId);
+  data.jobs=(data.jobs||[]).filter(function(j){return j.id!==jobId;});
+  putC(contractorId,data);
+}
+
+function closeHist(){ document.getElementById('histModal').classList.add('hidden'); }
+function logFromHist(){ closeHist(); openLog(_histId,_histName); }
+function toggleCOIFromHist(){ toggleCOI(_histId); renderHistKPIs(_histId); render(); }
+
+// ══════════════════════════════════════════════
+//  TAB NAVIGATION + RENDER
+// ══════════════════════════════════════════════
+function switchView(viewId){
+  currentView=viewId;
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('on',t.dataset.view===viewId);});
+  document.querySelectorAll('.view').forEach(function(v){v.classList.toggle('on',v.id==='view-'+viewId);});
+  // toolbar only on pipeline + contacts
+  document.getElementById('toolbar').style.display=(viewId==='pipeline'||viewId==='contacts')?'flex':'none';
+  render();
+}
+
+function render(){
+  if(currentView==='pipeline') renderPipeline();
+  else if(currentView==='contacts') renderContacts();
+  else if(currentView==='analytics') renderAnalytics();
+  else if(currentView==='activity') renderActivity();
+  else if(currentView==='dispatch') renderDispatch();
+}
+
+// Tab click
+document.querySelectorAll('.tab').forEach(function(tab){
+  tab.addEventListener('click',function(){switchView(tab.dataset.view);});
+});
+
+// Filter clicks
+document.querySelectorAll('.tb-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.tb-btn').forEach(function(b){b.classList.remove('on');});
+    btn.classList.add('on');
+    activeFilter=btn.dataset.filter;
+    render();
+  });
+});
+
+// Sort + search
+document.getElementById('sortSel').addEventListener('change',function(){sortKey=this.value;render();});
+document.getElementById('searchInput').addEventListener('input',function(){
+  searchVal=this.value.toLowerCase();
+  // clear category filter when searching
+  if(searchVal){ document.querySelectorAll('.tb-btn').forEach(function(b){b.classList.remove('on');}); activeFilter='all'; }
+  render();
+});
+
+// ══════════════════════════════════════════════
+//  DISPATCH CENTER
+// ══════════════════════════════════════════════
+var CAT_LABELS={pressure:'Pressure Washing',junk:'Junk Removal',window:'Window Cleaning',gutter:'Gutter Cleaning',pet:'Pet Waste Removal',holiday:'Holiday Lighting'};
+var CAT_EMOJI={pressure:'🔵',junk:'🟠',window:'🟣',gutter:'🩵',pet:'🩷',holiday:'🔴'};
+var CAT_AVG={pressure:350,junk:420,window:280,gutter:220,pet:95,holiday:700};
+var DISPATCH_KEY='partna_dispatches';
+
+function getDispatches(){try{return JSON.parse(localStorage.getItem(DISPATCH_KEY)||'[]');}catch(e){return[];}}
+function saveDispatches(arr){localStorage.setItem(DISPATCH_KEY,JSON.stringify(arr));}
+
+function updateDispatchPreview(){
+  var cat=document.getElementById('dispatchCat').value;
+  var date=document.getElementById('dispatchDate').value;
+  var addr=document.getElementById('dispatchAddr').value||'[address]';
+  var price=parseFloat(document.getElementById('dispatchPrice').value)||CAT_AVG[cat];
+  var payout=Math.round(price*0.5);
+  var notes=document.getElementById('dispatchNotes').value;
+  var catLabel=CAT_LABELS[cat]||cat;
+  var emoji=CAT_EMOJI[cat]||'🔧';
+  var dateStr=date?new Date(date+'T12:00:00').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'}):'[date TBD]';
+  var msg=emoji+' NEW JOB \u2014 Lake County Home Services\n';
+  msg+='Service: '+catLabel+'\n';
+  msg+='Address: '+addr+'\n';
+  msg+='Date: '+dateStr+'\n';
+  msg+='Your payout: $'+payout+' (50% of $'+price+')\n';
+  if(notes) msg+='Notes: '+notes+'\n';
+  msg+='\nReply YES to confirm or NO to pass.';
+  document.getElementById('dispatchPreview').textContent=msg;
+}
+
+function copyDispatchSMS(){
+  var txt=document.getElementById('dispatchPreview').textContent;
+  if(txt.indexOf('Fill in')===0) return;
+  navigator.clipboard.writeText(txt).then(function(){
+    var btn=document.getElementById('dispatchCopyBtn');
+    btn.textContent='✅ Copied!';
+    setTimeout(function(){btn.textContent='📋 Copy SMS';},2000);
+  });
+}
+
+function logDispatch(){
+  var cat=document.getElementById('dispatchCat').value;
+  var date=document.getElementById('dispatchDate').value||new Date().toISOString().slice(0,10);
+  var addr=document.getElementById('dispatchAddr').value;
+  var price=parseFloat(document.getElementById('dispatchPrice').value)||CAT_AVG[cat];
+  var notes=document.getElementById('dispatchNotes').value;
+  if(!addr){alert('Enter customer address before logging dispatch.');return;}
+  var dispatches=getDispatches();
+  dispatches.unshift({id:Date.now(),cat:cat,date:date,address:addr,price:price,payout:Math.round(price*0.5),notes:notes,status:'sent'});
+  saveDispatches(dispatches);
+  // Reset form
+  document.getElementById('dispatchAddr').value='';
+  document.getElementById('dispatchPrice').value='';
+  document.getElementById('dispatchNotes').value='';
+  document.getElementById('dispatchDate').value='';
+  document.getElementById('dispatchPreview').textContent='Fill in the fields above to generate your dispatch SMS\u2026';
+  renderDispatchLog();
+}
+
+function renderDispatch(){
+  // Set today as default date
+  var dateInput=document.getElementById('dispatchDate');
+  if(!dateInput.value) dateInput.value=new Date().toISOString().slice(0,10);
+  updateDispatchPreview();
+  renderDispatchGrid();
+  renderDispatchLog();
+}
+
+function renderDispatchGrid(){
+  var grid=document.getElementById('dispatchGrid');
+  grid.textContent='';
+  var cats=['pressure','junk','window','gutter','pet','holiday'];
+  cats.forEach(function(cat){
+    var activeSubs=SUBS.filter(function(s){
+      var data=getC(s.id);
+      return (data.status||'new')==='active' && s.cats.indexOf(cat)>=0;
+    });
+    var card=document.createElement('div');
+    card.className='dcat-card';
+
+    var hdr=document.createElement('div');hdr.className='dcat-header';
+    var nm=document.createElement('div');nm.className='dcat-name';
+    nm.textContent=CAT_EMOJI[cat]+' '+CAT_LABELS[cat];
+    var badge=document.createElement('span');
+    badge.className='dcat-badge'+(activeSubs.length===0?' none':'');
+    badge.textContent=activeSubs.length===0?'No active subs':activeSubs.length+' active';
+    hdr.appendChild(nm);hdr.appendChild(badge);card.appendChild(hdr);
+
+    var list=document.createElement('div');list.className='dsub-list';
+    if(activeSubs.length===0){
+      var empty=document.createElement('div');empty.className='dsub-empty';
+      empty.textContent='No active subs in this category yet. Advance a sub to Active in Pipeline.';
+      list.appendChild(empty);
+    } else {
+      activeSubs.forEach(function(sub){
+        var row=document.createElement('div');row.className='dsub-row';
+        var nameEl=document.createElement('div');nameEl.className='dsub-name';nameEl.textContent=sub.name;
+        var phoneEl=document.createElement('div');phoneEl.className='dsub-phone';
+        phoneEl.textContent='('+sub.phone.slice(0,3)+') '+sub.phone.slice(3,6)+'-'+sub.phone.slice(6);
+        var dispBtn=document.createElement('button');dispBtn.className='dispatch-sms-btn';
+        dispBtn.textContent='Copy SMS';
+        (function(s,c){
+          dispBtn.addEventListener('click',function(){
+            var price=CAT_AVG[c];
+            var payout=Math.round(price*0.5);
+            var msg=CAT_EMOJI[c]+' NEW JOB \u2014 Lake County Home Services\nService: '+CAT_LABELS[c]+'\nAddress: [enter address]\nDate: [enter date]\nYour payout: $'+payout+' (50% of $'+price+')\nReply YES to confirm or NO to pass.';
+            navigator.clipboard.writeText(msg).then(function(){
+              dispBtn.textContent='✅ Copied!';dispBtn.className='dispatch-sms-btn copied';
+              setTimeout(function(){dispBtn.textContent='Copy SMS';dispBtn.className='dispatch-sms-btn';},2500);
+            });
+          });
+        })(sub,cat);
+        row.appendChild(nameEl);row.appendChild(phoneEl);row.appendChild(dispBtn);
+        list.appendChild(row);
+      });
+    }
+    card.appendChild(list);
+
+    // Quick-dispatch button fills the form
+    var quickBtn=document.createElement('button');
+    quickBtn.className='btn-primary';
+    quickBtn.style.cssText='font-size:11px;padding:6px 12px;width:100%';
+    quickBtn.textContent='Fill Form for '+CAT_LABELS[cat];
+    (function(c){quickBtn.addEventListener('click',function(){
+      document.getElementById('dispatchCat').value=c;
+      updateDispatchPreview();
+      document.getElementById('dispatchAddr').focus();
+    });})(cat);
+    card.appendChild(quickBtn);
+
+    grid.appendChild(card);
+  });
+}
+
+function renderDispatchLog(){
+  var pane=document.getElementById('dispatchLogPane');
+  pane.textContent='';
+  var dispatches=getDispatches();
+  if(dispatches.length===0){
+    var empty=document.createElement('div');empty.className='dlog-empty';
+    empty.textContent='No dispatches logged yet. Fill in the New Incoming Job form above and click Mark as Dispatched.';
+    pane.appendChild(empty);return;
+  }
+  var table=document.createElement('table');table.className='dlog-table';
+  var thead=document.createElement('thead');
+  var hr=document.createElement('tr');
+  ['Date','Category','Address','Job Value','Sub Payout','Notes',''].forEach(function(h){var th=document.createElement('th');th.textContent=h;hr.appendChild(th);});
+  thead.appendChild(hr);table.appendChild(thead);
+  var tbody=document.createElement('tbody');
+  dispatches.forEach(function(d){
+    var tr=document.createElement('tr');
+    var dateStr=d.date?new Date(d.date+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'}):'—';
+    [dateStr,CAT_EMOJI[d.cat]+' '+CAT_LABELS[d.cat],d.address||'—','$'+(d.price||0),'$'+(d.payout||0),d.notes||'—'].forEach(function(v,i){
+      var td=document.createElement('td');td.textContent=v;
+      if(i===3){td.style.color='var(--green)';}
+      if(i===4){td.style.color='var(--yellow)';}
+      tr.appendChild(td);
+    });
+    var tdDel=document.createElement('td');
+    var del=document.createElement('button');del.className='btn-delete';del.textContent='Delete';
+    (function(did){del.addEventListener('click',function(){
+      var arr=getDispatches().filter(function(x){return x.id!==did;});
+      saveDispatches(arr);renderDispatchLog();
+    });})(d.id);
+    tdDel.appendChild(del);tr.appendChild(tdDel);
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);pane.appendChild(table);
+}
+
+// ══════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════
+updateSummary();
+render();
+</script>
+</body>
+</html>
