@@ -160,47 +160,55 @@
     .nav-cta { background: var(--gold); color: var(--navy) !important; font-weight: 700 !important; padding: 8px 18px; border-radius: 6px; }
 
     .hero {
-      background-image: url('https://images.unsplash.com/photo-1750736094600-7105c2b4512a?auto=format&fit=crop&w=1800&q=80');
+      background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1800&q=80');
       background-size: cover;
       background-position: center center;
-      padding: 80px 5% 70px;
+      padding: 100px 5% 90px;
       position: relative;
       overflow: hidden;
+      text-align: center;
     }
     .hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(100deg,
-        rgba(10,26,52,0.91) 0%,
-        rgba(15,34,64,0.88) 55%,
-        rgba(15,34,64,0.72) 100%
+      background: linear-gradient(180deg,
+        rgba(8,20,40,0.88) 0%,
+        rgba(10,26,52,0.82) 100%
       );
       pointer-events: none;
     }
-    .hero-inner { position: relative; z-index: 1; }
+    .hero-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
     .hero h1 { text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
     .hero p  { text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
-    .hero-inner { max-width: 780px; }
-    .hero-text { }
-    .hero-image-wrap { width: 100%; line-height: 0; }
-    .hero-image-wrap img { width: 100%; height: 420px; object-fit: cover; object-position: center 20%; display: block; }
     .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(46,204,113,0.15); border: 1px solid rgba(46,204,113,0.4); color: #6ee09a; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; margin-bottom: 22px; letter-spacing: 0.04em; text-transform: uppercase; }
-    .hero h1 { font-size: clamp(30px, 5vw, 52px); font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 18px; letter-spacing: -0.5px; }
+    .hero h1 { font-size: clamp(32px, 5vw, 56px); font-weight: 800; color: var(--white); line-height: 1.12; margin-bottom: 20px; letter-spacing: -0.5px; }
     .hero h1 span { color: #2ecc71; }
-    .hero p { font-size: clamp(15px, 2vw, 18px); color: rgba(255,255,255,0.8); max-width: 560px; margin-bottom: 32px; }
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+    .hero p { font-size: clamp(15px, 2vw, 18px); color: rgba(255,255,255,0.8); max-width: 540px; margin: 0 auto 32px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: center; }
     .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--navy); font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: var(--radius); text-decoration: none; transition: background 0.2s, transform 0.15s; border: none; cursor: pointer; }
     .btn-primary:hover { background: var(--gold2); transform: translateY(-1px); }
     .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--white); font-weight: 600; font-size: 15px; padding: 14px 24px; border-radius: var(--radius); text-decoration: none; border: 1px solid rgba(255,255,255,0.3); transition: border-color 0.2s, background 0.2s; }
     .btn-secondary:hover { background: rgba(255,255,255,0.08); }
-    .hero-trust { display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap; }
+    .hero-trust { display: flex; gap: 24px; margin-top: 40px; flex-wrap: wrap; justify-content: center; }
     .trust-item { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.7); font-size: 13px; }
 
-    .section { padding: 72px 5%; }
+    .section { padding: 80px 5%; }
     .section-alt { background: var(--gray1); }
-    .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--green); margin-bottom: 10px; }
-    .section-title { font-size: clamp(24px, 3.5vw, 36px); font-weight: 800; color: var(--ink); line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; }
-    .section-sub { font-size: 16px; color: var(--ink3); max-width: 560px; line-height: 1.7; margin-bottom: 48px; }
+    .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--green); margin-bottom: 10px; text-align: center; }
+    .section-title { font-size: clamp(24px, 3.5vw, 38px); font-weight: 800; color: var(--ink); line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; text-align: center; }
+    .section-sub { font-size: 16px; color: var(--ink3); max-width: 560px; line-height: 1.7; margin: 0 auto 48px; text-align: center; }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1160px; margin: 0 auto; }
+    @media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; } }
+    .service-card { border-radius: 14px; overflow: hidden; background: var(--white); border: 1px solid var(--gray2); box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: transform 0.2s, box-shadow 0.2s; }
+    .service-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+    .service-card-img { width: 100%; height: 230px; object-fit: cover; display: block; }
+    .service-card-body { padding: 26px; }
+    .service-card-badge { display: inline-block; background: rgba(22,101,52,0.1); color: var(--green); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; margin-bottom: 12px; }
+    .service-card-body h3 { font-size: 20px; font-weight: 800; color: var(--ink); margin-bottom: 8px; }
+    .service-card-body p { font-size: 14px; color: var(--ink3); line-height: 1.7; margin-bottom: 20px; }
+    .service-card-link { display: inline-flex; align-items: center; gap: 6px; background: var(--navy); color: var(--white); font-weight: 700; font-size: 13px; padding: 10px 18px; border-radius: 7px; text-decoration: none; transition: background 0.2s; }
+    .service-card-link:hover { background: var(--green); }
 
     .calc-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
     .calc-tab { padding: 9px 18px; border-radius: 8px; border: 1px solid var(--gray3); background: var(--white); color: var(--ink2); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
@@ -262,18 +270,18 @@
     .form-success-msg h3 { font-size: 22px; font-weight: 800; color: var(--green); margin-bottom: 8px; }
     .form-success-msg p { font-size: 14px; color: var(--ink3); }
 
-    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+    .steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto; }
     .step { text-align: center; padding: 28px 20px; }
     .step-num { width: 48px; height: 48px; border-radius: 50%; background: var(--navy); color: var(--gold); font-weight: 800; font-size: 20px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
     .step-title { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
     .step-desc { font-size: 14px; color: var(--ink3); line-height: 1.65; }
 
-    .areas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; }
+    .areas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 14px; max-width: 1000px; margin: 0 auto; }
     .area-card { background: var(--white); border: 1px solid var(--gray2); border-radius: var(--radius); padding: 18px 20px; }
     .area-name { font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 3px; }
     .area-sub { font-size: 12px; color: var(--ink3); }
 
-    .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; max-width: 1000px; margin: 0 auto; }
     .why-item { display: flex; gap: 14px; align-items: flex-start; background: var(--white); border: 1px solid var(--gray2); border-radius: var(--radius); padding: 20px; }
     .why-icon { font-size: 22px; flex-shrink: 0; width: 42px; height: 42px; background: var(--gray1); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
     .why-text h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
@@ -325,7 +333,43 @@
 </section>
 
 
-<section class="section" id="pricing">
+<!-- SERVICES CARDS -->
+<section class="section" id="services">
+  <div class="section-label">What We Do</div>
+  <div class="section-title">Three Services. Transparent Pricing.</div>
+  <p class="section-sub">Every job is handled by a vetted, insured local crew. See your price before you commit — no callbacks, no deposits.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <img class="service-card-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80" alt="Pressure washing driveway in Lake County IL" />
+      <div class="service-card-body">
+        <div class="service-card-badge">Starting at $199</div>
+        <h3>Pressure Washing</h3>
+        <p>House exteriors, driveways, decks, fences, and sidewalks. Hot-water equipment. Bundle 3+ surfaces for 10% off.</p>
+        <a href="#pricing" class="service-card-link" onclick="switchCalcDirect('pressure')">See My Price →</a>
+      </div>
+    </div>
+    <div class="service-card">
+      <img class="service-card-img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80" alt="Junk removal truck Lake County IL" />
+      <div class="service-card-body">
+        <div class="service-card-badge">Starting at $129</div>
+        <h3>Junk Removal</h3>
+        <p>Load-based pricing. Furniture, appliances, garage cleanouts, estate cleanouts. Same-day available. Pay after pickup.</p>
+        <a href="#pricing" class="service-card-link" onclick="switchCalcDirect('junk')">See My Price →</a>
+      </div>
+    </div>
+    <div class="service-card">
+      <img class="service-card-img" src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&w=800&q=80" alt="Pet waste removal yard cleanup Lake County IL" />
+      <div class="service-card-body">
+        <div class="service-card-badge">Starting at $95/mo</div>
+        <h3>Pet Waste Removal</h3>
+        <p>Weekly or bi-weekly yard scooping subscription. Month-to-month, cancel anytime. First visit includes a free catch-up clean.</p>
+        <a href="#pricing" class="service-card-link" onclick="switchCalcDirect('petwaste')">See My Price →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="pricing">
   <div class="section-label">Instant Pricing</div>
   <div class="section-title">Your Price. Right Now.</div>
   <p class="section-sub">No estimate requests. No waiting for a callback. Pick your service, answer 2–3 questions, see exactly what you'll pay.</p>
@@ -477,9 +521,9 @@
     </div>
   </div>
 
-</section>
+</section><!-- /pricing -->
 
-<section class="section section-alt">
+<section class="section" id="how-it-works">
   <div class="section-label">The Process</div>
   <div class="section-title">Booked in Minutes. Done by Tomorrow.</div>
   <p class="section-sub">You see the price first. Then decide. No callbacks required just to get a number.</p>
@@ -527,7 +571,7 @@
   <div class="section-label">FAQ</div>
   <div class="section-title">Common Questions</div>
   <p class="section-sub">Everything Lake County homeowners ask before booking.</p>
-  <div style="max-width:720px;display:flex;flex-direction:column;gap:12px" id="faq-list">
+  <div style="max-width:720px;display:flex;flex-direction:column;gap:12px;margin:0 auto" id="faq-list">
 
     <details style="background:var(--white);border:1px solid var(--gray2);border-radius:var(--radius);padding:20px 24px;cursor:pointer">
       <summary style="font-weight:700;font-size:15px;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center">How much does pressure washing cost in Lake County? <span style="color:var(--ink3);font-size:20px;font-weight:400">+</span></summary>
@@ -839,6 +883,12 @@ function submitBook(e) {
     form.style.display = 'none';
     document.getElementById('book-success').style.display = 'block';
   });
+}
+
+// ── SERVICE CARD SHORTCUT ──
+function switchCalcDirect(id) {
+  var btn = document.querySelector('.calc-tab[onclick*="' + id + '"]');
+  if (btn) { switchCalc(id, btn); }
 }
 
 // ── INIT ──
