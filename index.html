@@ -142,10 +142,10 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --navy: #0E3386; --navy2: #0a2a6e; --blue: #1a4aad;
-      --gold: #CC3433; --gold2: #e04848; --green: #1e7a4a;
+      --navy: #111111; --navy2: #1c1c1c; --blue: #166534;
+      --gold: #2ecc71; --gold2: #27ae60; --green: #16a34a;
       --white: #ffffff; --gray1: #f8f9fb; --gray2: #eef0f4; --gray3: #d0d5de;
-      --ink: #1a1f2e; --ink2: #374151; --ink3: #6b7280;
+      --ink: #111111; --ink2: #222222; --ink3: #444444;
       --radius: 10px; --shadow: 0 4px 20px rgba(0,0,0,0.08); --shadow-md: 0 8px 32px rgba(0,0,0,0.12);
     }
     html { scroll-behavior: smooth; }
@@ -184,9 +184,9 @@
     .hero-text { }
     .hero-image-wrap { width: 100%; line-height: 0; }
     .hero-image-wrap img { width: 100%; height: 420px; object-fit: cover; object-position: center 20%; display: block; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(204,52,51,0.2); border: 1px solid rgba(204,52,51,0.45); color: #f07070; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; margin-bottom: 22px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(46,204,113,0.15); border: 1px solid rgba(46,204,113,0.4); color: #6ee09a; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; margin-bottom: 22px; letter-spacing: 0.04em; text-transform: uppercase; }
     .hero h1 { font-size: clamp(30px, 5vw, 52px); font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 18px; letter-spacing: -0.5px; }
-    .hero h1 span { color: #f07070; }
+    .hero h1 span { color: #2ecc71; }
     .hero p { font-size: clamp(15px, 2vw, 18px); color: rgba(255,255,255,0.8); max-width: 560px; margin-bottom: 32px; }
     .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
     .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--navy); font-weight: 700; font-size: 16px; padding: 14px 28px; border-radius: var(--radius); text-decoration: none; transition: background 0.2s, transform 0.15s; border: none; cursor: pointer; }
@@ -198,13 +198,13 @@
 
     .section { padding: 72px 5%; }
     .section-alt { background: var(--gray1); }
-    .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 10px; }
+    .section-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--green); margin-bottom: 10px; }
     .section-title { font-size: clamp(24px, 3.5vw, 36px); font-weight: 800; color: var(--ink); line-height: 1.2; margin-bottom: 14px; letter-spacing: -0.3px; }
     .section-sub { font-size: 16px; color: var(--ink3); max-width: 560px; line-height: 1.7; margin-bottom: 48px; }
 
     .calc-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
     .calc-tab { padding: 9px 18px; border-radius: 8px; border: 1px solid var(--gray3); background: var(--white); color: var(--ink2); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
-    .calc-tab:hover { border-color: var(--gold); color: var(--gold); }
+    .calc-tab:hover { border-color: var(--green); color: var(--green); }
     .calc-tab.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
 
     .calc-panel { display: none; }
@@ -218,7 +218,7 @@
     .calc-label span { font-weight: 400; color: var(--ink3); }
     .calc-options { display: flex; gap: 8px; flex-wrap: wrap; }
     .calc-option { padding: 8px 14px; border-radius: 7px; border: 1px solid var(--gray3); background: var(--white); color: var(--ink2); font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.15s; }
-    .calc-option:hover { border-color: var(--gold); color: var(--gold); }
+    .calc-option:hover { border-color: var(--green); color: var(--green); }
     .calc-option.selected { background: var(--navy); color: var(--white); border-color: var(--navy); }
 
     .calc-toggle { display: flex; align-items: center; gap: 10px; cursor: pointer; }
@@ -249,11 +249,11 @@
     .modal { background: var(--white); border-radius: 14px; padding: 36px; width: 100%; max-width: 460px; position: relative; max-height: 90vh; overflow-y: auto; }
     .modal-close { position: absolute; top: 16px; right: 16px; background: var(--gray2); border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; color: var(--ink3); }
     .modal h3 { font-size: 20px; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
-    .modal-price-line { font-size: 15px; color: var(--gold); font-weight: 700; margin-bottom: 20px; }
+    .modal-price-line { font-size: 15px; color: var(--green); font-weight: 700; margin-bottom: 20px; }
     .form-group { margin-bottom: 14px; }
     .form-group label { display: block; font-size: 12px; font-weight: 600; color: var(--ink2); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; }
     .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 11px 14px; border: 1px solid var(--gray3); border-radius: 7px; font-family: inherit; font-size: 14px; color: var(--ink); background: var(--white); transition: border-color 0.2s; outline: none; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(204,52,51,0.12); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(46,204,113,0.15); }
     .form-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .form-submit-btn { width: 100%; padding: 14px; background: var(--navy); color: var(--white); font-weight: 700; font-size: 15px; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s; margin-top: 4px; }
     .form-submit-btn:hover { background: var(--gold2); }
